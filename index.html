@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFB Mutual Insurance Holding Company — Strategic Intelligence Brief</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2a5a8c;
+            --accent: #d4a843;
+            --accent-dark: #b88a2a;
+            --bg: #f5f6fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #5d6d7e;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --border: #e1e8ed;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.5rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; margin-bottom: 0.25rem; position: relative; }
+        .hero .meta { font-size: 0.85rem; opacity: 0.7; position: relative; }
+        .hero .badge {
+            display: inline-block; background: var(--accent); color: var(--primary);
+            padding: 0.3rem 1rem; border-radius: 20px; font-weight: 600;
+            font-size: 0.8rem; margin-top: 1rem; position: relative;
+        }
+
+        nav {
+            background: white;
+            border-bottom: 2px solid var(--border);
+            padding: 0 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav a {
+            display: block;
+            padding: 0.8rem 1rem;
+            text-decoration: none;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        nav a:hover, nav a.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 1.5rem; }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        .grid { display: grid; gap: 1.5rem; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+        .card h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 0.5rem; }
+        .card .value { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .card .change { font-size: 0.85rem; margin-top: 0.25rem; }
+        .card .change.positive { color: var(--success); }
+        .card .change.negative { color: var(--danger); }
+
+        .chart-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .chart-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .chart-container { position: relative; height: 300px; }
+
+        .merger-banner {
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+        }
+        .merger-banner h2 { color: var(--primary); font-size: 1.3rem; margin-bottom: 0.75rem; }
+        .merger-banner p { color: var(--text); font-size: 0.95rem; }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.55rem;
+            top: 0.4rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        .timeline-item .year {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        .timeline-item .desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        table th, table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        table tr:hover td { background: #f8f9fb; }
+        table td.number { text-align: right; font-variant-numeric: tabular-nums; }
+
+        .insight-box {
+            background: linear-gradient(135deg, #e8f4fd 0%, #dceefb 100%);
+            border-left: 4px solid var(--primary-light);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .insight-box h4 { color: var(--primary); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .insight-box p { color: var(--text); font-size: 0.9rem; }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .org-node {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 200px;
+            position: relative;
+        }
+        .org-node.highlight {
+            background: var(--accent-dark);
+            color: white;
+            border: 2px dashed var(--danger);
+        }
+        .org-node small { display: block; font-weight: 400; opacity: 0.85; font-size: 0.75rem; }
+        .org-connector {
+            width: 3px;
+            height: 30px;
+            background: var(--primary);
+        }
+        .org-children {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+        }
+        .org-children::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 20%;
+            right: 20%;
+            height: 3px;
+            background: var(--primary);
+        }
+        .org-child-connector {
+            width: 3px;
+            height: 20px;
+            background: var(--primary);
+            margin: 0 auto;
+        }
+        .org-child {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .org-node.sub {
+            background: var(--primary-light);
+            font-size: 0.8rem;
+            padding: 0.6rem 1rem;
+            min-width: 160px;
+        }
+        .org-node.new {
+            background: #27ae60;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(39, 174, 96, 0); }
+        }
+
+        .kpi-strip {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+        .kpi { text-align: center; }
+        .kpi .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); }
+        .kpi .val { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+        .kpi .sub { font-size: 0.8rem; color: var(--text-light); }
+
+        .tab-container { margin: 1rem 0; }
+        .tab-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+        .tab-btn {
+            padding: 0.5rem 1.2rem;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { border-color: var(--primary-light); color: var(--primary); }
+        .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .source-note {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        .footer p { opacity: 0.8; font-size: 0.85rem; }
+        .footer a { color: var(--accent); }
+
+        .ratio-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        .ratio-bar .label { width: 140px; font-size: 0.85rem; color: var(--text-light); }
+        .ratio-bar .bar-bg {
+            flex: 1;
+            height: 24px;
+            background: #ecf0f1;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .ratio-bar .bar-fill {
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+        }
+        .ratio-bar .bar-fill.good { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+        .ratio-bar .bar-fill.ok { background: linear-gradient(90deg, #f39c12, #f1c40f); }
+        .ratio-bar .bar-fill.warn { background: linear-gradient(90deg, #e67e22, #e74c3c); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.5rem; }
+            nav a { padding: 0.6rem 0.6rem; font-size: 0.78rem; }
+            .org-children { flex-direction: column; align-items: center; }
+            .org-children::before { display: none; }
+        }
+        section { scroll-margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="badge">STRATEGIC INTELLIGENCE BRIEF</div>
+    <h1>IFB Mutual Insurance Holding Company</h1>
+    <p class="subtitle">Farm Bureau Insurance Company of Idaho &amp; The Mountain West Merger</p>
+    <p class="meta">Public Data Analysis &bull; Sources: Idaho DOI Annual Statement (12/31/2024), Company Press Releases, NAIC Filings</p>
+</div>
+
+<nav>
+    <ul>
+        <li><a href="#executive-summary" class="active">Executive Summary</a></li>
+        <li><a href="#merger">Merger Analysis</a></li>
+        <li><a href="#financials">Financials</a></li>
+        <li><a href="#underwriting">Underwriting</a></li>
+        <li><a href="#investments">Investments</a></li>
+        <li><a href="#structure">Corporate Structure</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#pension">Pension</a></li>
+        <li><a href="#ai-vision">AI Vision</a></li>
+        <li><a href="#sources">Sources</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+    <!-- EXECUTIVE SUMMARY -->
+    <section id="executive-summary">
+        <h2 class="section-title">Executive Summary</h2>
+
+        <div class="grid grid-4" style="margin-top:1rem;">
+            <div class="card">
+                <h3>Total Admitted Assets</h3>
+                <div class="value">$757M</div>
+                <div class="change positive">&#9650; 11.2% vs 2023</div>
+            </div>
+            <div class="card">
+                <h3>Gross Premiums Written</h3>
+                <div class="value">$401M</div>
+                <div class="change positive">&#9650; 19.6% vs 2023</div>
+            </div>
+            <div class="card">
+                <h3>Policyholder Surplus</h3>
+                <div class="value">$377M</div>
+                <div class="change positive">&#9650; 11.1% vs 2023</div>
+            </div>
+            <div class="card">
+                <h3>Net Income</h3>
+                <div class="value">$26.5M</div>
+                <div class="change positive">&#9650; 259% vs 2023</div>
+            </div>
+        </div>
+
+        <div class="grid grid-4" style="margin-top:1rem;">
+            <div class="card">
+                <h3>A.M. Best Rating</h3>
+                <div class="value" style="color:var(--success)">A</div>
+                <div class="change">(Excellent) — Upgraded 3 consecutive years</div>
+            </div>
+            <div class="card">
+                <h3>Ward's Top 50</h3>
+                <div class="value" style="color:var(--accent-dark)">Top 50</div>
+                <div class="change">Multiple consecutive years</div>
+            </div>
+            <div class="card">
+                <h3>Combined Ratio (est.)</h3>
+                <div class="value" style="color:var(--success)">93.9%</div>
+                <div class="change positive">Profitable underwriting year</div>
+            </div>
+            <div class="card">
+                <h3>Post-Merger Premium</h3>
+                <div class="value">$800M+</div>
+                <div class="change">5 states, 130K+ members</div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top:1.5rem;">
+            <h4>&#128270; Key Analyst Takeaway</h4>
+            <p>FBICI delivered a strong comeback year in 2024 with net income surging 259% to $26.5M — driven by premium growth of 19.6% and a dramatic swing from an underwriting loss of ($4.9M) in 2023 to a gain of $20.7M. The company's 5-year gross premium CAGR of 11.7% significantly outpaces the P&C industry average. The announced merger with Mountain West Farm Bureau will roughly double the holding company's annualized premium to $800M+, expanding the footprint from 2 states to 5 and positioning IFB Mutual as one of the largest Farm Bureau-affiliated groups in the western U.S.</p>
+        </div>
+
+        <!-- CEO Leadership Impact -->
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>&#128200; Leadership Impact — The Argall Era (CEO since Nov 2019)</h3>
+            <div class="grid grid-2" style="margin-top:1rem;">
+                <div class="chart-container" style="min-height:300px;">
+                    <canvas id="argallGrowthChart"></canvas>
+                </div>
+                <div class="chart-container" style="min-height:300px;">
+                    <canvas id="argallIncomeChart"></canvas>
+                </div>
+            </div>
+            <div class="insight-box" style="margin-top:1rem;">
+                <h4>&#127942; Scorecard: Pre-Argall (2019) vs. Year 5 (2024)</h4>
+                <div class="grid grid-4" style="margin-top:0.5rem;">
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--success);">+52%</div>
+                        <div style="font-size:0.8rem;color:var(--text-light);">Premiums Earned<br>$224M → $341M</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--success);">+26%</div>
+                        <div style="font-size:0.8rem;color:var(--text-light);">Net Income<br>$21.0M → $26.5M</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--success);">+46%</div>
+                        <div style="font-size:0.8rem;color:var(--text-light);">Total Assets<br>$519M → $757M</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--success);">+47%</div>
+                        <div style="font-size:0.8rem;color:var(--text-light);">Surplus<br>$256M → $377M</div>
+                    </div>
+                </div>
+            </div>
+            <p class="source-note">2019 data (pre-Argall baseline) from the 2020 Annual Statement filed with Idaho DOI (prior-year column). 2020–2024 data from the 2024 Annual Statement five-year exhibit. Todd Argall became EVP & CEO on November 13, 2019, per company press release. 2019 is the last full fiscal year under prior CEO Paul Roberts.</p>
+        </div>
+    </section>
+
+    <!-- MERGER ANALYSIS -->
+    <section id="merger">
+        <h2 class="section-title">Mountain West Merger Deep Dive</h2>
+
+        <div class="merger-banner">
+            <h2>&#9733; Strategic Merger Announced</h2>
+            <p><strong>Mountain West Farm Bureau Mutual Insurance Company</strong> (est. 1948, Laramie, WY) will merge into <strong>IFB Mutual Insurance Holding Company</strong>. Mountain West will convert from a mutual to a stock company wholly owned by IFB Mutual. The merger is subject to regulatory approval in multiple states and expected to take approximately four months to complete.</p>
+        </div>
+
+        <div class="grid grid-2">
+            <div class="chart-card">
+                <h3>Pre-Merger vs. Post-Merger Scale</h3>
+                <p class="source-note" style="margin-bottom:1rem;">FBICI premium from Idaho DOI 2024 annual statement. Combined $800M+ and membership figures from FBICI press release. Mountain West premium (~$399M) is estimated by subtraction — their filings are not publicly available online.</p>
+                <div class="chart-container">
+                    <canvas id="mergerCompare"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Geographic Expansion</h3>
+                <div style="padding:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr><th>State</th><th>Pre-Merger</th><th>Post-Merger</th><th>Primary Writer</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Idaho</td><td style="color:var(--success)">&#10003;</td><td style="color:var(--success)">&#10003;</td><td>FBICI (dominant)</td></tr>
+                            <tr><td>Washington</td><td style="color:var(--success)">&#10003;</td><td style="color:var(--success)">&#10003;</td><td>FBICI (expansion)</td></tr>
+                            <tr><td>Wyoming</td><td style="color:var(--danger)">&#10007;</td><td style="color:var(--success)">&#10003;</td><td>Mountain West (#1 farm)</td></tr>
+                            <tr><td>Montana</td><td style="color:var(--danger)">&#10007;</td><td style="color:var(--success)">&#10003;</td><td>Mountain West (top 4 farm)</td></tr>
+                            <tr><td>Colorado</td><td style="color:var(--danger)">&#10007;</td><td style="color:var(--success)">&#10003;</td><td>360 Insurance (subsidiary)</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:1.5rem;">
+            <div class="card">
+                <h3>FBICI Contribution</h3>
+                <div class="value" style="font-size:1.5rem;">~$401M</div>
+                <div class="change">Gross Premiums Written (2024)</div>
+                <div style="margin-top:0.75rem; font-size:0.85rem; color:var(--text-light);">
+                    <div>&#8226; 450+ employees</div>
+                    <div>&#8226; Largest insurer wholly based in Idaho</div>
+                    <div>&#8226; #1 farm/ranch writer in Idaho</div>
+                </div>
+            </div>
+            <div class="card" style="border:2px dashed var(--warning);">
+                <h3>Mountain West Contribution <span style="font-size:0.7rem;background:var(--warning);color:white;padding:2px 6px;border-radius:4px;vertical-align:middle;">ESTIMATED</span></h3>
+                <div class="value" style="font-size:1.5rem;">~$399M</div>
+                <div class="change">Est. Annualized Premium (by subtraction)*</div>
+                <div style="margin-top:0.75rem; font-size:0.85rem; color:var(--text-light);">
+                    <div>&#8226; ~100 agents across WY, MT, CO</div>
+                    <div>&#8226; #1 farm/ranch writer in Wyoming</div>
+                    <div>&#8226; 77+ years of service</div>
+                </div>
+                <p class="source-note" style="margin-top:0.75rem;">*Derived from FBICI press release stating $800M+ combined premium minus FBICI's verified $401M GPW. Mountain West's actual financial filings were not available via public web sources. Wyoming DOI reports are behind Google Drive links.</p>
+            </div>
+            <div class="card">
+                <h3>Combined Entity</h3>
+                <div class="value" style="font-size:1.5rem; color:var(--success);">$800M+</div>
+                <div class="change positive">Annualized Premiums</div>
+                <div style="margin-top:0.75rem; font-size:0.85rem; color:var(--text-light);">
+                    <div>&#8226; 5 states: ID, WA, WY, MT, CO</div>
+                    <div>&#8226; 130,000+ members</div>
+                    <div>&#8226; 450+ employees, 250+ agents</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top:1.5rem;">
+            <h4>&#128161; Strategic Merger Insights</h4>
+            <p><strong>1. Mutual-to-Stock Conversion:</strong> Mountain West will convert from a mutual insurer to a stock company wholly owned by IFB Mutual. This is a significant structural change that gives IFB Mutual direct equity control while Mountain West retains its brand identity.</p>
+            <p style="margin-top:0.5rem;"><strong>2. Cultural & Mission Alignment:</strong> Both companies share Farm Bureau roots, agricultural focus, and community-first values — reducing integration risk. Jim Geesey (MW CEO) called Idaho "a natural fit."</p>
+            <p style="margin-top:0.5rem;"><strong>3. Scale Advantages:</strong> The combined $800M+ premium base creates opportunities for reinsurance leverage, technology investment amortization, and diversified risk across 5 states with different catastrophe profiles. Idaho's wildfire risk is partially offset by Wyoming/Montana's hail exposure and different geographic concentration.</p>
+            <p style="margin-top:0.5rem;"><strong>4. Regulatory Complexity:</strong> The merger requires approval from insurance departments in Idaho, Wyoming, Montana, and potentially Colorado — each with different holding company act requirements and policyholder notification rules. The ~4-month timeline suggests regulatory pre-filing work has been done.</p>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:1.5rem;">
+            <div class="chart-card">
+                <h3>Merger Synergy Opportunity Areas</h3>
+                <div class="chart-container">
+                    <canvas id="synergyChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Risk Diversification Impact</h3>
+                <div class="chart-container">
+                    <canvas id="riskDiversification"></canvas>
+                </div>
+                <p class="source-note">Note: Relative exposure scores are qualitative estimates based on general regional climate and natural peril characteristics (e.g., Idaho's significant wildfire history, Wyoming/Montana's hail belt exposure, Northern Rockies winter storm frequency). These are not derived from any specific loss data filing or actuarial study and are intended for directional illustration only.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINANCIALS -->
+    <section id="financials">
+        <h2 class="section-title">Financial Performance (10-Year, 2015–2024)</h2>
+        <p class="source-note">Source: FBICI Annual Statements filed with Idaho Department of Insurance. 10-year premium and loss data from Schedule P (2024 filing). Income and balance sheet data from individual year filings (2020, 2022, 2024). All figures statutory basis. Vertical line marks Todd Argall becoming CEO (Nov 2019).</p>
+
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('premium-tab', this)">Premium Growth</button>
+                <button class="tab-btn" onclick="switchTab('income-tab', this)">Income Trends</button>
+                <button class="tab-btn" onclick="switchTab('assets-tab', this)">Balance Sheet</button>
+                <button class="tab-btn" onclick="switchTab('ratios-tab', this)">Key Ratios</button>
+            </div>
+
+            <div id="premium-tab" class="tab-content active">
+                <div class="grid grid-2">
+                    <div class="chart-card">
+                        <h3>Net Premiums Earned (10-Year)</h3>
+                        <div class="chart-container">
+                            <canvas id="premiumChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Year-Over-Year NPE Growth Rate</h3>
+                        <div class="chart-container">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card" style="margin-top:1.5rem;">
+                    <h3>Detailed Premium Data ($M)</h3>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead>
+                                <tr><th>Metric</th><th class="number">2015</th><th class="number">2016</th><th class="number">2017</th><th class="number">2018</th><th class="number">2019</th><th class="number">2020</th><th class="number">2021</th><th class="number">2022</th><th class="number">2023</th><th class="number">2024</th><th class="number">10yr CAGR</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Net Premiums Earned</td><td class="number">$166.4</td><td class="number">$177.9</td><td class="number">$192.8</td><td class="number">$210.4</td><td class="number">$224.1</td><td class="number">$239.0</td><td class="number">$249.6</td><td class="number">$269.3</td><td class="number">$299.4</td><td class="number">$341.4</td><td class="number" style="color:var(--success);font-weight:700">8.3%</td></tr>
+                                <tr><td>YoY Growth</td><td class="number">—</td><td class="number">6.9%</td><td class="number">8.4%</td><td class="number">9.1%</td><td class="number">6.5%</td><td class="number">6.7%</td><td class="number">4.4%</td><td class="number">7.9%</td><td class="number">11.2%</td><td class="number">14.0%</td><td class="number">—</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="source-note" style="margin-top:0.5rem;">All 10 years verified from Schedule P Part 1 Summary of the 2024 Annual Statement filed with Idaho DOI. These are accident-year net premiums earned.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="income-tab" class="tab-content">
+                <div class="grid grid-2">
+                    <div class="chart-card">
+                        <h3>Net Income & Underwriting Gain (Loss)</h3>
+                        <div class="chart-container">
+                            <canvas id="incomeChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Income Components (2024)</h3>
+                        <div class="chart-container">
+                            <canvas id="incomeBreakdown"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card" style="margin-top:1.5rem;">
+                    <h3>Income Statement Overview ($M)</h3>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead>
+                                <tr><th>Metric</th><th class="number">2019</th><th class="number">2020</th><th class="number">2021</th><th class="number">2022</th><th class="number">2023</th><th class="number">2024</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Net Underwriting Gain/(Loss)</td><td class="number">$2.2</td><td class="number">$3.2</td><td class="number">$0.7</td><td class="number">$9.7</td><td class="number" style="color:var(--danger)">($4.9)</td><td class="number" style="color:var(--success)">$20.7</td></tr>
+                                <tr><td>Net Investment Gain</td><td class="number">$14.7</td><td class="number">$24.8</td><td class="number">$25.7</td><td class="number">$12.9</td><td class="number">$14.3</td><td class="number">$14.6</td></tr>
+                                <tr><td>Total Other Income</td><td class="number">$0.31</td><td class="number">$0.05</td><td class="number">($0.17)</td><td class="number">($0.02)</td><td class="number">($0.47)</td><td class="number">$0.08</td></tr>
+                                <tr><td>Federal Income Taxes</td><td class="number">($3.8)</td><td class="number">($1.3)</td><td class="number">$0.6</td><td class="number">$4.0</td><td class="number">$1.6</td><td class="number">$8.9</td></tr>
+                                <tr style="font-weight:700;"><td>Net Income</td><td class="number">$21.0</td><td class="number">$29.4</td><td class="number">$25.6</td><td class="number">$18.7</td><td class="number">$7.4</td><td class="number" style="color:var(--success)">$26.5</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <h4>&#128200; Income Analysis</h4>
+                    <p>In 2019 (pre-Argall), net income was $21.0M with a thin $2.2M underwriting gain. Under Argall, 2024 was a breakthrough year: the $25.6M swing in underwriting results (from –$4.9M to +$20.7M) was the primary income driver. Investment gains remained stable at ~$14.6M. The 2020 spike in net income ($29.4M) was fueled by $13.2M in realized capital gains that have since normalized. Net premiums earned grew 52% over the period ($224M→$341M).</p>
+                </div>
+            </div>
+
+            <div id="assets-tab" class="tab-content">
+                <div class="grid grid-2">
+                    <div class="chart-card">
+                        <h3>Total Admitted Assets Growth</h3>
+                        <div class="chart-container">
+                            <canvas id="assetsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Asset Allocation (2024)</h3>
+                        <div class="chart-container">
+                            <canvas id="assetAllocation"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card" style="margin-top:1.5rem;">
+                    <h3>Balance Sheet Summary ($M)</h3>
+                    <div style="overflow-x:auto;">
+                        <table>
+                            <thead>
+                                <tr><th>Item</th><th class="number">2024</th><th class="number">2023</th><th class="number">Change</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Assets</strong></td><td></td><td></td><td></td></tr>
+                                <tr><td>&nbsp;&nbsp;Bonds</td><td class="number">$423.6</td><td class="number">$406.2</td><td class="number positive">+4.3%</td></tr>
+                                <tr><td>&nbsp;&nbsp;Common Stocks</td><td class="number">$127.9</td><td class="number">$115.9</td><td class="number positive">+10.4%</td></tr>
+                                <tr><td>&nbsp;&nbsp;Cash & Short-Term</td><td class="number">$37.5</td><td class="number">$8.5</td><td class="number positive">+341%</td></tr>
+                                <tr><td>&nbsp;&nbsp;Real Estate</td><td class="number">$12.4</td><td class="number">$9.6</td><td class="number positive">+29.2%</td></tr>
+                                <tr><td>&nbsp;&nbsp;Other Invested Assets</td><td class="number">$18.8</td><td class="number">$18.0</td><td class="number positive">+4.6%</td></tr>
+                                <tr style="font-weight:700;"><td>&nbsp;&nbsp;Total Invested Assets</td><td class="number">$620.2</td><td class="number">$559.9</td><td class="number positive">+10.8%</td></tr>
+                                <tr><td>&nbsp;&nbsp;Premiums Receivable</td><td class="number">$113.5</td><td class="number">$100.4</td><td class="number positive">+13.1%</td></tr>
+                                <tr style="font-weight:700;border-top:2px solid var(--primary);"><td>Total Admitted Assets</td><td class="number">$757.0</td><td class="number">$680.6</td><td class="number positive">+11.2%</td></tr>
+                                <tr><td><strong>Liabilities</strong></td><td></td><td></td><td></td></tr>
+                                <tr><td>&nbsp;&nbsp;Loss Reserves</td><td class="number">$112.7</td><td class="number">$119.5</td><td class="number positive">–5.7%</td></tr>
+                                <tr><td>&nbsp;&nbsp;LAE Reserves</td><td class="number">$20.1</td><td class="number">$20.4</td><td class="number">–1.8%</td></tr>
+                                <tr><td>&nbsp;&nbsp;Unearned Premiums</td><td class="number">$193.6</td><td class="number">$156.8</td><td class="number">+23.5%</td></tr>
+                                <tr style="font-weight:700;border-top:2px solid var(--primary);"><td>Policyholder Surplus</td><td class="number">$376.8</td><td class="number">$339.3</td><td class="number positive">+11.1%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="insight-box">
+                    <h4>&#128176; Balance Sheet Insights</h4>
+                    <p>Cash balances surged 341% to $37.5M — possibly building liquidity ahead of the Mountain West merger transaction. Loss reserves actually decreased 5.7% despite premium growth, suggesting favorable reserve development or an improving loss environment. The surplus-to-net-premium ratio of 99.6% ($377M / $378M NPW) indicates strong capitalization well above regulatory minimums.</p>
+                </div>
+            </div>
+
+            <div id="ratios-tab" class="tab-content">
+                <div class="chart-card">
+                    <h3>Key Performance Ratios</h3>
+                    <div style="padding:1rem 0;">
+                        <div class="ratio-bar">
+                            <span class="label">Loss Ratio</span>
+                            <div class="bar-bg"><div class="bar-fill good" style="width:61.4%;">61.4%</div></div>
+                        </div>
+                        <div class="ratio-bar">
+                            <span class="label">Expense Ratio</span>
+                            <div class="bar-bg"><div class="bar-fill ok" style="width:32.5%;">32.5%</div></div>
+                        </div>
+                        <div class="ratio-bar">
+                            <span class="label">Combined Ratio</span>
+                            <div class="bar-bg"><div class="bar-fill good" style="width:93.9%;">93.9%</div></div>
+                        </div>
+                        <div class="ratio-bar">
+                            <span class="label">NPW / Surplus</span>
+                            <div class="bar-bg"><div class="bar-fill good" style="width:50%;">1.00x</div></div>
+                        </div>
+                        <div class="ratio-bar">
+                            <span class="label">Invest Yield</span>
+                            <div class="bar-bg"><div class="bar-fill ok" style="width:25%;">~2.6%</div></div>
+                        </div>
+                        <div class="ratio-bar">
+                            <span class="label">Retention Ratio</span>
+                            <div class="bar-bg"><div class="bar-fill good" style="width:94.4%;">94.4%</div></div>
+                        </div>
+                    </div>
+                    <p class="source-note">Loss Ratio = Losses Incurred / Net Premiums Earned. Expense Ratio = (LAE + Other UW Exp) / Net Premiums Earned. Combined Ratio = Loss + Expense. NPW/Surplus &lt; 3.0x is considered strong.</p>
+                </div>
+                <div class="grid grid-2" style="margin-top:1.5rem;">
+                    <div class="chart-card">
+                        <h3>Loss Ratio Trend (10-Year, Schedule P)</h3>
+                        <div class="chart-container">
+                            <canvas id="combinedRatioChart"></canvas>
+                        </div>
+                        <p class="source-note">10-year loss ratios (Ultimate Incurred Losses ÷ Net Premiums Earned) sourced from Schedule P – Analysis of Losses and Loss Expenses, 2024 Annual Statement filed with the Idaho Department of Insurance.</p>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Surplus Growth vs Premium Growth</h3>
+                        <div class="chart-container">
+                            <canvas id="surplusVsPremium"></canvas>
+                        </div>
+                        <p class="source-note">Net Premiums Earned: 10-year data (2015–2024) from Schedule P, 2024 Annual Statement. Surplus: 6 years only (2019–2024) — $256.3M (2019), $278.6M (2020), $301.2M (2021) from 2020/2022 filings; $325.3M (2022), $339M (2023), $377M (2024) from 2024 filing. Pre-2019 surplus not publicly available.</p>
+                    </div>
+                </div>
+                <div class="chart-card" style="margin-top:1.5rem;">
+                    <h3>Combined Ratio Trend (6-Year, 2019–2024)</h3>
+                    <div class="chart-container">
+                        <canvas id="fullCombinedRatioChart"></canvas>
+                    </div>
+                    <p class="source-note">Combined Ratio = (Losses Incurred + LAE Incurred + Other UW Expenses) ÷ Net Premiums Earned. 2020–2024 operating percentages from Five-Year Historical Data exhibit (page 38), 2024 Annual Statement. 2019 calculated from 2020 filing prior-year income statement. Below 100% = profitable underwriting.</p>
+                </div>
+                <div class="insight-box">
+                    <h4>&#128202; Ratio Analysis</h4>
+                    <p>The 2024 combined ratio of 93.9% is the best in the 6-year period — a dramatic improvement from the 101.6% in 2023 (which produced the only underwriting loss). The pre-Argall 2019 ratio of 99.0% hovered near breakeven. Under Argall's leadership, results have been volatile but trending favorably, with 2024 delivering the breakout year. The NPW-to-surplus ratio of 1.0x demonstrates exceptional capital strength — the industry average is typically 1.5–2.0x. This overcapitalization supports the merger rationale: deploying excess capital to acquire Mountain West and leverage scale. The 94.4% retention ratio (low ceded reinsurance) reflects confidence in the book and strong internal risk appetite.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UNDERWRITING -->
+    <section id="underwriting">
+        <h2 class="section-title">Underwriting Profile</h2>
+
+        <div class="grid grid-2">
+            <div class="chart-card">
+                <h3>Premium Mix by Line of Business (2024 Net Written)</h3>
+                <div class="chart-container">
+                    <canvas id="lobMix"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Losses Incurred vs Earned Premium Trend</h3>
+                <div class="chart-container">
+                    <canvas id="lossVsPremium"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>Net Premiums Written by Major Line ($M) — 2024</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>Line of Business</th><th class="number">Net Written</th><th class="number">% of Total</th><th>Risk Profile</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Private Passenger Auto (Liability)</td><td class="number">$68.3</td><td class="number">18.1%</td><td>&#128663; Core auto — frequency-driven</td></tr>
+                        <tr><td>Homeowners Multiple Peril</td><td class="number">$62.8</td><td class="number">16.6%</td><td>&#127968; Wildfire exposure in Idaho</td></tr>
+                        <tr><td>Commercial Multiple Peril</td><td class="number">$49.2</td><td class="number">13.0%</td><td>&#127981; Small-medium business</td></tr>
+                        <tr><td>Farmowners Multiple Peril</td><td class="number">$41.3</td><td class="number">10.9%</td><td>&#127806; Heritage line — #1 in Idaho</td></tr>
+                        <tr><td>Auto Physical Damage</td><td class="number">$39.1</td><td class="number">10.3%</td><td>&#128295; Comp & collision</td></tr>
+                        <tr><td>Other Liability</td><td class="number">$31.2</td><td class="number">8.2%</td><td>&#128220; General & umbrella liability</td></tr>
+                        <tr><td>Commercial Auto</td><td class="number">$27.8</td><td class="number">7.3%</td><td>&#128666; Commercial fleet</td></tr>
+                        <tr><td>Workers' Compensation</td><td class="number">$17.3</td><td class="number">4.6%</td><td>&#9874; Agricultural & commercial WC</td></tr>
+                        <tr><td>Inland Marine</td><td class="number">$12.8</td><td class="number">3.4%</td><td>&#128230; Equipment & specialty</td></tr>
+                        <tr><td>Non-Prop Reinsurance (Assumed)</td><td class="number">$11.5</td><td class="number">3.0%</td><td>&#128257; Assumed from affiliates</td></tr>
+                        <tr><td>Other Lines</td><td class="number">$16.9</td><td class="number">4.5%</td><td>Fire, allied, crop, etc.</td></tr>
+                        <tr style="font-weight:700; border-top:2px solid var(--primary);"><td>Total</td><td class="number">$378.2</td><td class="number">100%</td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <h4>&#127793; Underwriting Insights</h4>
+            <p><strong>Diversification:</strong> FBICI maintains a well-diversified book. No single line exceeds 18.1% of premium. The personal auto + homeowners combination (35%) provides stable premium flow, while the substantial farm/ranch book (11%) is the company's heritage differentiator.</p>
+            <p style="margin-top:0.5rem;"><strong>Reinsurance:</strong> The $46.2M in assumed unearned premiums from affiliates — primarily from Western Community Insurance Company — and the WCIC management fee arrangement (17% of WCIC premiums) demonstrate the intercompany synergies already present in the holding company structure. These operational patterns will likely extend to Mountain West post-merger.</p>
+        </div>
+    </section>
+
+    <!-- INVESTMENTS -->
+    <section id="investments">
+        <h2 class="section-title">Investment Portfolio</h2>
+
+        <div class="grid grid-2">
+            <div class="chart-card">
+                <h3>Investment Portfolio Composition ($620M Total)</h3>
+                <div class="chart-container">
+                    <canvas id="investmentPie"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>Investment Income Trend ($M)</h3>
+                <div class="chart-container">
+                    <canvas id="investIncomeChart"></canvas>
+                </div>
+                <p class="source-note">All 6 years verified: 2019–2020 investment income/realized gains from 2020 annual statement, 2021–2022 from 2022 filing, 2023–2024 from 2024 filing.</p>
+            </div>
+        </div>
+
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>Investment Portfolio Detail</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>Asset Class</th><th class="number">2024 Value</th><th class="number">% of Portfolio</th><th>Notes</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Bonds (Fixed Income)</td><td class="number">$423.6M</td><td class="number">68.3%</td><td>Political subdivision & industrial/misc</td></tr>
+                        <tr><td>Common Stocks — Unaffiliated</td><td class="number">$66.9M</td><td class="number">10.8%</td><td>Level 1 & 2 fair value</td></tr>
+                        <tr><td>Common Stocks — Affiliated</td><td class="number">$61.0M</td><td class="number">9.8%</td><td>Farm Bureau Finance Co, Farm Ins. Brokerage</td></tr>
+                        <tr><td>Cash & Equivalents</td><td class="number">$37.5M</td><td class="number">6.0%</td><td>Significant increase from $8.5M in 2023</td></tr>
+                        <tr><td>Other Invested Assets</td><td class="number">$18.8M</td><td class="number">3.0%</td><td>Schedule BA assets</td></tr>
+                        <tr><td>Real Estate</td><td class="number">$12.4M</td><td class="number">2.0%</td><td>HQ + income property (21st Century LLC)</td></tr>
+                        <tr style="font-weight:700; border-top:2px solid var(--primary);"><td>Total</td><td class="number">$620.2M</td><td class="number">100%</td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <h4>&#128176; Investment Insights</h4>
+            <p><strong>Conservative Allocation:</strong> The 68% bond allocation reflects a conservative, liability-driven strategy typical of P&C insurers. The pension fund ($86.9M) also follows a liability-driven approach with 90% in fixed income.</p>
+            <p style="margin-top:0.5rem;"><strong>Cash Build-up:</strong> The 341% increase in cash reserves ($8.5M → $37.5M) is notable. This likely positions the company for the Mountain West acquisition and provides flexibility for post-merger integration costs.</p>
+            <p style="margin-top:0.5rem;"><strong>Affiliate Investments ($61M):</strong> Represents stakes in Farm Bureau Finance Company ($54.9M, 59.76% ownership) and Farm Insurance Brokerage Company ($2.1M, 100% ownership). These provide ancillary revenue streams beyond core underwriting.</p>
+        </div>
+    </section>
+
+    <!-- CORPORATE STRUCTURE -->
+    <section id="structure">
+        <h2 class="section-title">Corporate Structure</h2>
+
+        <div class="chart-card">
+            <h3>IFB Mutual Insurance Holding Company — Organizational Chart</h3>
+            <p class="source-note">Source: Schedule Y, Part 1, FBICI 2024 Annual Statement. Mountain West (green) will join upon merger completion.</p>
+
+            <div class="org-chart" style="padding:2rem 0;">
+                <div class="org-node" style="background:#5d6d7e;">
+                    Members (Policyholders)
+                    <small>Mutual ownership</small>
+                </div>
+                <div class="org-connector"></div>
+                <div style="display:flex; align-items:center; gap:0;">
+                    <div class="org-node" style="background:#34495e;">
+                        Board of Directors
+                    </div>
+                </div>
+                <div class="org-connector"></div>
+                <div class="org-node" style="min-width:350px;">
+                    IFB Mutual Insurance Holding Company
+                    <small>Idaho Corporation • EIN: 99-2419343</small>
+                </div>
+                <div class="org-connector"></div>
+                <div class="org-children">
+                    <div class="org-child">
+                        <div class="org-child-connector"></div>
+                        <div class="org-node sub">
+                            Farm Ins. Brokerage Co.
+                            <small>100% owned • EIN: 82-6006746</small>
+                        </div>
+                    </div>
+                    <div class="org-child">
+                        <div class="org-child-connector"></div>
+                        <div class="org-node" style="min-width:280px;">
+                            Farm Bureau Insurance Co. of Idaho
+                            <small>100% owned • EIN: 82-0189910 • NAIC</small>
+                        </div>
+                        <div class="org-connector"></div>
+                        <div class="org-children">
+                            <div class="org-child">
+                                <div class="org-child-connector"></div>
+                                <div class="org-node sub">
+                                    Farm Bureau Finance Co.
+                                    <small>59.76% owned • EIN: 82-6006745</small>
+                                </div>
+                            </div>
+                            <div class="org-child">
+                                <div class="org-child-connector"></div>
+                                <div class="org-node sub">
+                                    Western Community Ins. Co.
+                                    <small>96.72% owned • EIN: 82-0356463</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="org-child">
+                        <div class="org-child-connector"></div>
+                        <div class="org-node new">
+                            Mountain West Farm Bureau
+                            <small>MERGING IN • Stock conversion</small>
+                        </div>
+                        <div class="org-connector" style="background:#27ae60;"></div>
+                        <div class="org-node sub" style="background:#27ae60;">
+                            360 Insurance (CO)
+                            <small>MW subsidiary</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>Key People & Governance</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>Role</th><th>Name / Entity</th><th>Notes</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>CEO, IFB Mutual & FBICI</td><td><strong>Todd Argall</strong></td><td>Executive Vice President & CEO</td></tr>
+                        <tr><td>CEO, Mountain West</td><td><strong>Jim Geesey</strong></td><td>President & CEO</td></tr>
+                        <tr><td>Independent Auditor</td><td>Johnson Lambert LLP</td><td>Raleigh, NC — specialty insurance auditor</td></tr>
+                        <tr><td>Appointed Actuary</td><td>Steven J. Regnier, ACAS, MAAA, FCA</td><td>Regnier Consulting Group, Stevens Point, WI</td></tr>
+                        <tr><td>Domiciliary Regulator</td><td>Idaho Department of Insurance</td><td>Boise, ID — Last exam as of 12/31/2020</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>Intercompany Relationships</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>Relationship</th><th>Detail</th><th>Financial Impact (2024)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>FBICI → WCIC</td><td>Management services agreement</td><td>WCIC pays 17% of premiums written to FBICI</td></tr>
+                        <tr><td>FBICI → IFB Mutual</td><td>Ordinary dividend</td><td>$500,000 paid May 17, 2024</td></tr>
+                        <tr><td>Consolidated Tax</td><td>Federal income tax filed jointly</td><td>FBICI, WCIC, Farm Bureau Finance, Farm Ins. Brokerage</td></tr>
+                        <tr><td>FBICI ← WCIC</td><td>Assumed reinsurance</td><td>$46.2M assumed unearned premium (affiliate)</td></tr>
+                        <tr><td>Amounts Due</td><td>Due from affiliates</td><td>$3.0M due from affiliates (net)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history">
+        <h2 class="section-title">Company History & Milestones</h2>
+
+        <div class="grid grid-2">
+            <div class="chart-card">
+                <h3>Corporate Timeline</h3>
+                <div class="timeline" style="padding:1rem 0 1rem 2rem;">
+                    <div class="timeline-item">
+                        <div class="year">May 1, 1947</div>
+                        <div class="desc">Founded as Idaho Farm Insurance Company in Pocatello, ID. Offered only auto insurance; first 60 days premium: ~$10,000.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">1950s</div>
+                        <div class="desc">Became mutual company, renamed <strong>Farm Bureau Mutual Insurance Company of Idaho</strong>. Added life, fire, and inland marine. Premiums grew 10x.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">1960s</div>
+                        <div class="desc">First to offer complete "package" policy in Idaho. Established Farm Insurance Brokerage Co. and Farm Bureau Finance Co.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">1980s</div>
+                        <div class="desc">Western Community Insurance Company established for commercial/specialty lines. Record membership growth. New HQ built.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2000s</div>
+                        <div class="desc">Built current headquarters overlooking Portneuf Valley, Pocatello.</div>
+                    </div>
+                    <div class="timeline-item" style="border-left:2px solid var(--accent);">
+                        <div class="year" style="color:var(--accent); font-weight:700;">Nov 13, 2019</div>
+                        <div class="desc"><strong>Todd Argall named EVP & CEO</strong>, replacing Paul Roberts (29 years of service). Argall came from Rural Mutual Insurance (WI) where he spent 24 years and helped achieve an A+ AM Best rating. Gross premium at entry: ~$241M.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2020</div>
+                        <div class="desc">Dissolved Farm Bureau Insurance Service Company of Idaho (shell company) via statutory merger.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2021</div>
+                        <div class="desc">Forbes Best-In-State Insurance Company. Demotech STAR Award (first Idaho insurer). AM Best upgrades (3rd consecutive year).</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2023</div>
+                        <div class="desc">Expanded into Washington state via partnership with WA Farm Bureau Federation.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">April 1, 2024</div>
+                        <div class="desc"><strong>Holding company restructuring:</strong> Became Farm Bureau Insurance Company of Idaho under new parent IFB Mutual Insurance Holding Company.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="year">2024–2025</div>
+                        <div class="desc">Ward's Top 50 performer (multiple years). Ranked #5 Best Places to Work in Idaho. $45K donated to Idaho RFPAs (wildfire protection).</div>
+                    </div>
+                    <div class="timeline-item" style="border-left:2px solid var(--success);">
+                        <div class="year" style="color:var(--success);">2025–2026</div>
+                        <div class="desc"><strong>Mountain West Farm Bureau merger announced.</strong> Combined entity: $800M+ premium, 5 states, 130K+ members.</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="chart-card">
+                    <h3>Premium Growth: From $10K to $400M</h3>
+                    <div class="chart-container">
+                        <canvas id="historicGrowth"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card" style="margin-top:1.5rem;">
+                    <h3>Awards & Recognition</h3>
+                    <div style="padding:0.5rem 0;">
+                        <div style="display:flex;gap:1rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);">
+                            <span style="font-size:1.5rem;">⭐</span>
+                            <div><strong>A.M. Best: A (Excellent)</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Financial Strength Rating — upgraded 3 consecutive years</span></div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);">
+                            <span style="font-size:1.5rem;">🏆</span>
+                            <div><strong>Ward's Top 50</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Top 50 performing P&C insurer in the United States — multiple years</span></div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);">
+                            <span style="font-size:1.5rem;">📰</span>
+                            <div><strong>Forbes Best-In-State</strong><br><span style="font-size:0.8rem;color:var(--text-light);">America's Best-In-State Insurance Companies 2021</span></div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:center;padding:0.5rem 0;border-bottom:1px solid var(--border);">
+                            <span style="font-size:1.5rem;">🌟</span>
+                            <div><strong>Demotech STAR Award</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Stakeholder Team Accomplishment Recognition — 3 consecutive years. First Idaho insurer.</span></div>
+                        </div>
+                        <div style="display:flex;gap:1rem;align-items:center;padding:0.5rem 0;">
+                            <span style="font-size:1.5rem;">💼</span>
+                            <div><strong>Best Places to Work in Idaho</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Top 10 — 2 consecutive years. Ranked #5.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATA PENSION -->
+    <section id="pension" style="margin-top:2rem;">
+        <h2 class="section-title">Employee Benefits & Pension</h2>
+        <div class="grid grid-3">
+            <div class="card">
+                <h3>Defined Benefit Pension</h3>
+                <div class="value" style="font-size:1.5rem;">$86.9M</div>
+                <div class="change">Total plan assets at fair value</div>
+                <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-light);">
+                    Fixed income: $78.0M (90%)<br>
+                    Equities: $8.5M (10%)<br>
+                    Cash: $0.4M
+                </div>
+            </div>
+            <div class="card">
+                <h3>Net Periodic Pension Cost</h3>
+                <div class="value" style="font-size:1.5rem;">$3.3M</div>
+                <div class="change">Annual pension expense (est.)</div>
+                <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-light);">
+                    Service cost: $1.84M<br>
+                    Interest cost: $4.70M<br>
+                    Expected return: ($4.34M)
+                </div>
+            </div>
+            <div class="card">
+                <h3>Projected Benefit Payments</h3>
+                <div class="value" style="font-size:1.5rem;">$55.5M</div>
+                <div class="change">2025–2034 estimated payouts</div>
+                <div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-light);">
+                    2025: $4.9M &bull; 2026: $5.0M<br>
+                    2027: $5.2M &bull; 2028: $5.4M<br>
+                    2029: $5.5M &bull; 2030–34: $29.6M
+                </div>
+            </div>
+        </div>
+        <div class="insight-box">
+            <h4>&#128178; 401(k) & Benefits</h4>
+            <p>The company sponsors both a defined benefit pension and a 401(k) plan. 401(k) max employer match: $400/yr (pre-2017 hires) or 6% of salary capped at $6,000 (post-2017 hires). 2024 401(k) expense: $449K. Voluntary $3M pension contribution planned for 2025. Retired employees receive life insurance and healthcare benefits (closed to post-certain-date hires).</p>
+        </div>
+    </section>
+
+    <!-- AI VISION -->
+    <section id="ai-vision">
+        <h2 class="section-title">AI Integration — The Next Competitive Edge</h2>
+
+        <div class="merger-banner" style="background: linear-gradient(135deg, #e8f4fd 0%, #dceefb 100%); border-color: var(--primary-light);">
+            <h2 style="margin-bottom:0.5rem;">&#129302; Why This Matters for FBICI</h2>
+            <p>The insurance industry is entering an AI transformation cycle. Carriers that integrate AI into core operations — not just marketing — will compound efficiency gains across underwriting, claims, and IT. With $757M in assets, 11 lines of business, and a post-merger footprint spanning 5 states, FBICI is at the ideal inflection point to invest in AI capabilities before competitors.</p>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:1.5rem;">
+            <div class="chart-card">
+                <h3>&#9889; Claims & Underwriting Automation</h3>
+                <div style="padding:0.5rem 0;">
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Automatic Damage Estimation</strong> — Computer vision models can analyze photos of property damage (hail, fire, auto collision) and generate preliminary repair estimates in seconds. This cuts days from the FNOL-to-estimate cycle and reduces adjuster windshield time.</p>
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Reserve Estimation</strong> — Machine learning models trained on FBICI's 10+ years of Schedule P loss development data can predict ultimate losses by line of business earlier and more accurately, improving reserve adequacy and reducing the surprise factor that drove the 2023 spike to 101.6% combined ratio.</p>
+                    <p style="font-size:0.9rem; color:var(--text);"><strong>Underwriting Triage</strong> — AI scoring models can flag high-severity risk submissions (wildfire-prone properties, commercial auto fleets) for senior underwriter review while fast-tracking standard farm and homeowners policies through automated decisioning.</p>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>&#128202; Data Analytics & Decision Intelligence</h3>
+                <div style="padding:0.5rem 0;">
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Natural Language Data Queries</strong> — LangChain-powered interfaces let actuaries and executives ask plain-English questions like <em>"What is our 3-year loss development factor for Idaho farmowners?"</em> and get instant answers from structured data — no SQL or BI tool expertise required.</p>
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Regulatory Filing Automation</strong> — AI agents can cross-reference annual statement exhibits (Schedule P, Schedule H, Five-Year Historical Data) to pre-populate statutory filings and flag inconsistencies before submission — reducing preparer hours and compliance risk.</p>
+                    <p style="font-size:0.9rem; color:var(--text);"><strong>Portfolio Monitoring</strong> — Continuous AI-driven analysis of premium vs loss trends by line, geography, and agent to identify emerging profitability issues or growth opportunities across the combined 5-state footprint.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:1.5rem;">
+            <div class="chart-card">
+                <h3>&#128187; IT Operations & Engineering</h3>
+                <div style="padding:0.5rem 0;">
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>AI-Assisted Code Development</strong> — AI copilot tools accelerate development velocity by 30–50% on internal applications, policy admin integrations, and data pipelines. Every engineer becomes more productive.</p>
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Intelligent Debugging & Monitoring</strong> — AI models analyze production logs, correlate error patterns, and suggest root causes — reducing mean-time-to-resolution for system outages that directly impact agents and policyholders.</p>
+                    <p style="font-size:0.9rem; color:var(--text);"><strong>Legacy System Migration</strong> — As the Mountain West integration proceeds, AI can accelerate data mapping, code conversion, and testing of legacy policy administration systems — the most time-consuming and error-prone part of any carrier merger.</p>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>&#127919; Strategic Advantage</h3>
+                <div style="padding:0.5rem 0;">
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Post-Merger Integration Accelerator</strong> — Combining two carriers' data, systems, and processes is a multi-year effort. AI-powered data reconciliation and automated testing can compress timelines significantly, realizing the projected synergies faster.</p>
+                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Agent & Policyholder Experience</strong> — Conversational AI for policy inquiries, coverage recommendations, and first-notice-of-loss intake — giving FBICI's 150+ agents a technology edge that independent agency carriers typically lack.</p>
+                    <p style="font-size:0.9rem; color:var(--text);"><strong>Competitive Moat</strong> — Regional mutual carriers rarely invest in AI. Being first in the Idaho/Mountain West market creates a sustainable advantage in loss ratio improvement, operational efficiency, and talent attraction.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box" style="margin-top:1.5rem;">
+            <h4>&#128161; The Business Case</h4>
+            <p>A 1-point improvement in combined ratio at FBICI's current premium volume is worth <strong>$3.4M in annual underwriting profit</strong> ($341M NPE × 1%). Across the combined $800M post-merger entity, it's <strong>$8M per year</strong>. AI-driven improvements to claims accuracy, reserve estimation, and underwriting selection can realistically deliver 2–4 points of combined ratio improvement over 3 years — a $16–32M annual impact. The ROI on AI investment isn't theoretical; it's the difference between hovering near breakeven (99% combined) and sustained profitability (93–95%).</p>
+            <p style="margin-top:0.75rem;"><strong>This dashboard itself is a demonstration.</strong> Built entirely with AI-assisted development, it extracts, validates, and visualizes data from actual regulatory filings — the same workflow that can be applied to internal actuarial analysis, board reporting, and competitive intelligence.</p>
+        </div>
+    </section>
+
+    <!-- SOURCES -->
+    <section id="sources">
+        <h2 class="section-title">Data Sources & Methodology</h2>
+        <div class="chart-card">
+            <h3>All data in this brief is sourced from publicly available records</h3>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>Source</th><th>Description</th><th>Access</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Idaho DOI — Insurer Financials</td><td>2024, 2022, and 2020 Annual Statements of Farm Bureau (Mutual) Insurance Company of Idaho (statutory accounting, NAIC format). Older filings used for 2019 pre-CEO baseline.</td><td><a href="https://doi.idaho.gov/information/public/insurer-data/" target="_blank">doi.idaho.gov/insurer-data</a></td></tr>
+                        <tr><td>FBICI Company Website</td><td>About Us, News, Historic Timeline, Mountain West merger announcement</td><td><a href="https://www.idahofarmbureauinsurance.com" target="_blank">idahofarmbureauinsurance.com</a></td></tr>
+                        <tr><td>Mountain West Website</td><td>Company information and product offerings</td><td><a href="https://www.mwfbi.com" target="_blank">mwfbi.com</a></td></tr>
+                        <tr><td>Idaho Farm Bureau Federation</td><td>Member organization context</td><td><a href="https://www.idahofb.org" target="_blank">idahofb.org</a></td></tr>
+                        <tr><td>NAIC Schedule Y</td><td>Holding company organizational structure (from annual statement)</td><td>Filed with Idaho DOI</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="margin-top:1rem; font-size:0.85rem; color:var(--text-light);">
+                <strong>Methodology:</strong> Financial ratios are calculated from the statutory annual statement filed by FBICI with the Idaho Department of Insurance for the year ending 12/31/2024. Combined ratio is estimated as (Losses Incurred + LAE Incurred + Other UW Expenses) / Net Premiums Earned. Mountain West premium estimates are based on the company's public statement of "$800M+ annualized premium" combined minus FBICI's known $401M GPW. All Mountain West figures are estimates pending their own regulatory filings. This analysis represents publicly available information only and does not constitute financial advice.
+            </p>
+        </div>
+    </section>
+</div>
+
+<div class="footer">
+    <p>IFB Mutual Insurance Holding Company — Strategic Intelligence Brief</p>
+    <p style="margin-top:0.5rem;">Compiled from public data sources &bull; Statutory financial data from Idaho DOI &bull; April 2026</p>
+    <p style="margin-top:0.5rem; font-size:0.75rem;">This analysis uses only publicly available data. It does not represent advice and should not be relied upon for investment or business decisions.</p>
+</div>
+
+<script>
+    // Chart.js defaults
+    Chart.defaults.font.family = "'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.plugins.legend.position = 'bottom';
+    Chart.defaults.plugins.legend.labels.boxWidth = 12;
+    Chart.defaults.plugins.legend.labels.padding = 15;
+
+    const years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+    const primary = '#1a3a5c';
+    const primaryLight = '#2a5a8c';
+    const accent = '#d4a843';
+    const success = '#27ae60';
+    const danger = '#e74c3c';
+
+    // Reusable annotation config: vertical line marking Argall's CEO start (between 2019 index=4 and 2020 index=5)
+    const argallAnnotation = {
+        annotations: {
+            ceoLine: {
+                type: 'line', xMin: 4.5, xMax: 4.5,
+                borderColor: danger, borderWidth: 2, borderDash: [6, 3],
+                label: { content: 'Todd Argall Named CEO', display: true, position: 'start', backgroundColor: danger, font: { size: 10 } }
+            }
+        }
+    };
+
+    // 6-year annotation for charts that only cover 2019-2024 (Argall line between index 0 and 1)
+    const argallAnnotation6 = {
+        annotations: {
+            ceoLine: {
+                type: 'line', xMin: 0.5, xMax: 0.5,
+                borderColor: danger, borderWidth: 2, borderDash: [6, 3],
+                label: { content: 'Todd Argall Named CEO', display: true, position: 'start', backgroundColor: danger, font: { size: 10 } }
+            }
+        }
+    };
+
+    // Argall Era Growth Chart (2019 baseline + 2020-2024)
+    const argallYears = ['2019', '2020', '2021', '2022', '2023', '2024'];
+    const argallBgColors = ['#95a5a6', accent, accent, accent, accent, accent];
+    new Chart(document.getElementById('argallGrowthChart'), {
+        type: 'bar',
+        data: {
+            labels: argallYears,
+            datasets: [
+                { label: 'Net Premiums Earned ($M)', data: [224.1, 239.0, 249.6, 269.3, 299.4, 341.4], backgroundColor: argallBgColors, borderRadius: 4 },
+                { label: 'Policyholder Surplus ($M)', data: [256.3, 278.6, 301.2, 325.3, 339.0, 377.0], backgroundColor: argallBgColors.map(c => c + '60'), borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                annotation: {
+                    annotations: {
+                        line1: { type: 'line', xMin: 0.5, xMax: 0.5, borderColor: danger, borderWidth: 2, borderDash: [6, 3],
+                            label: { content: 'Argall starts as CEO', display: true, position: 'start', backgroundColor: danger, font: { size: 10 } } }
+                    }
+                }
+            },
+            scales: { y: { beginAtZero: false, ticks: { callback: v => '$' + v + 'M' } } }
+        }
+    });
+
+    // Argall Era Income/UW Chart
+    new Chart(document.getElementById('argallIncomeChart'), {
+        type: 'line',
+        data: {
+            labels: argallYears,
+            datasets: [
+                { label: 'Net Income ($M)', data: [21.0, 29.4, 25.6, 18.7, 7.4, 26.5], borderColor: success, backgroundColor: success + '20', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: argallBgColors },
+                { label: 'UW Gain/Loss ($M)', data: [2.2, 3.2, 0.7, 9.7, -4.9, 20.7], borderColor: primaryLight, backgroundColor: primaryLight + '15', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: argallBgColors }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom' },
+                annotation: {
+                    annotations: {
+                        line1: { type: 'line', xMin: 0.5, xMax: 0.5, borderColor: danger, borderWidth: 2, borderDash: [6, 3],
+                            label: { content: 'Argall starts as CEO', display: true, position: 'start', backgroundColor: danger, font: { size: 10 } } }
+                    }
+                }
+            },
+            scales: { y: { ticks: { callback: v => '$' + v + 'M' } } }
+        }
+    });
+
+    // Premium Chart — Net Premiums Earned (verified all 10 years from Schedule P)
+    const preArgallColor = '#95a5a6';
+    const postArgallColor = primary;
+    const premiumColors = [preArgallColor, preArgallColor, preArgallColor, preArgallColor, preArgallColor, postArgallColor, postArgallColor, postArgallColor, postArgallColor, postArgallColor];
+    new Chart(document.getElementById('premiumChart'), {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [
+                { label: 'Net Premiums Earned ($M)', data: [166.4, 177.9, 192.8, 210.4, 224.1, 239.0, 249.6, 269.3, 299.4, 341.4], backgroundColor: premiumColors, borderRadius: 4 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }, annotation: argallAnnotation }, scales: { y: { beginAtZero: true, ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Growth Chart — NPE YoY growth rate (10 year)
+    new Chart(document.getElementById('growthChart'), {
+        type: 'line',
+        data: {
+            labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+            datasets: [{
+                label: 'NPE YoY Growth %',
+                data: [6.9, 8.4, 9.1, 6.5, 6.7, 4.4, 7.9, 11.2, 14.0],
+                borderColor: accent,
+                backgroundColor: accent + '20',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 6,
+                pointBackgroundColor: ['#95a5a6', '#95a5a6', '#95a5a6', '#95a5a6', accent, accent, accent, accent, accent]
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                annotation: {
+                    annotations: {
+                        ceoLine: { type: 'line', xMin: 3.5, xMax: 3.5, borderColor: danger, borderWidth: 2, borderDash: [6, 3],
+                            label: { content: 'Todd Argall Named CEO', display: true, position: 'start', backgroundColor: danger, font: { size: 10 } } }
+                    }
+                }
+            },
+            scales: { y: { ticks: { callback: v => v + '%' } } }
+        }
+    });
+
+    // Income Chart (6-year: 2019-2024)
+    new Chart(document.getElementById('incomeChart'), {
+        type: 'bar',
+        data: {
+            labels: argallYears,
+            datasets: [
+                { label: 'Net Income ($M)', data: [21.0, 29.4, 25.6, 18.7, 7.4, 26.5], backgroundColor: success, borderRadius: 4 },
+                { label: 'Net UW Gain/(Loss) ($M)', data: [2.2, 3.2, 0.7, 9.7, -4.9, 20.7], backgroundColor: primaryLight, borderRadius: 4 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { annotation: argallAnnotation6 }, scales: { y: { ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Income Breakdown (2024)
+    new Chart(document.getElementById('incomeBreakdown'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Net UW Gain', 'Net Invest. Income', 'Realized Gains/(Losses)', 'Other Income', 'Federal Taxes (deducted)'],
+            datasets: [{ data: [20.7, 15.5, -0.9, 0.08, -8.9], backgroundColor: [success, primary, danger, accent, '#95a5a6'] }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Assets Chart (6-year: 2019-2024)
+    new Chart(document.getElementById('assetsChart'), {
+        type: 'line',
+        data: {
+            labels: argallYears,
+            datasets: [
+                { label: 'Total Admitted Assets ($M)', data: [519.0, 558.8, 610.2, 644.8, 680.6, 757.0], borderColor: primary, backgroundColor: primary + '15', fill: true, tension: 0.3, pointRadius: 5 },
+                { label: 'Policyholder Surplus ($M)', data: [256.3, 278.6, 301.2, 325.3, 339, 377], borderColor: success, backgroundColor: success + '15', fill: true, tension: 0.3, pointRadius: 5 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { annotation: argallAnnotation6 }, scales: { y: { ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Asset Allocation
+    new Chart(document.getElementById('assetAllocation'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Bonds', 'Common Stocks (Unaffiliated)', 'Common Stocks (Affiliated)', 'Cash & Equivalents', 'Other Invested', 'Real Estate'],
+            datasets: [{ data: [423.6, 66.9, 61.0, 37.5, 18.8, 12.4], backgroundColor: [primary, primaryLight, accent, success, '#8e44ad', '#e67e22'] }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // LOB Mix
+    new Chart(document.getElementById('lobMix'), {
+        type: 'doughnut',
+        data: {
+            labels: ['PPA Liability', 'Homeowners', 'Commercial MP', 'Farmowners', 'Auto Phys Damage', 'Other Liability', 'Commercial Auto', 'Workers Comp', 'Inland Marine', 'Reinsurance Assumed', 'Other'],
+            datasets: [{
+                data: [68.3, 62.8, 49.2, 41.3, 39.1, 31.2, 27.8, 17.3, 12.8, 11.5, 16.9],
+                backgroundColor: ['#1a3a5c', '#2a5a8c', '#3a7abc', '#d4a843', '#27ae60', '#8e44ad', '#e67e22', '#e74c3c', '#1abc9c', '#34495e', '#95a5a6']
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Loss vs Premium
+    new Chart(document.getElementById('lossVsPremium'), {
+        type: 'bar',
+        data: {
+            labels: ['2023', '2024'],
+            datasets: [
+                { label: 'Net Premiums Earned ($M)', data: [299.4, 341.4], backgroundColor: primary, borderRadius: 4 },
+                { label: 'Losses Incurred ($M)', data: [210.6, 209.7], backgroundColor: danger, borderRadius: 4 },
+                { label: 'LAE Incurred ($M)', data: [14.4, 19.4], backgroundColor: '#e67e22', borderRadius: 4 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Investment Pie
+    new Chart(document.getElementById('investmentPie'), {
+        type: 'pie',
+        data: {
+            labels: ['Bonds ($423.6M)', 'Unaffiliated Stocks ($66.9M)', 'Affiliated Stocks ($61.0M)', 'Cash ($37.5M)', 'Other ($18.8M)', 'Real Estate ($12.4M)'],
+            datasets: [{ data: [423.6, 66.9, 61.0, 37.5, 18.8, 12.4], backgroundColor: [primary, primaryLight, accent, success, '#8e44ad', '#e67e22'] }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+
+    // Investment Income (6-year: 2019-2024)
+    new Chart(document.getElementById('investIncomeChart'), {
+        type: 'bar',
+        data: {
+            labels: argallYears,
+            datasets: [
+                { label: 'Net Invest. Income ($M)', data: [10.4, 11.6, 10.7, 11.5, 13.8, 15.5], backgroundColor: primary, borderRadius: 4 },
+                { label: 'Net Realized Gains/(Losses) ($M)', data: [4.3, 13.2, 15.0, 1.5, 0.5, -0.9], backgroundColor: accent, borderRadius: 4 }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { annotation: argallAnnotation6 }, scales: { y: { ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Merger Compare — separate metrics with proper units on each label
+    new Chart(document.getElementById('mergerCompare'), {
+        type: 'bar',
+        data: {
+            labels: [
+                'Annual Premium ($M)',
+                'States Served (count)',
+                'Members (thousands)',
+                'Agents & Staff (count)'
+            ],
+            datasets: [
+                { label: 'FBICI Pre-Merger (verified)', data: [401, 2, 70, 150], backgroundColor: primary, borderRadius: 4 },
+                { label: 'Combined Post-Merger (per press release)', data: [800, 5, 130, 250], backgroundColor: success, borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            const units = ['$M', ' states', 'K members', ' agents'];
+                            const i = ctx.dataIndex;
+                            const prefix = i === 0 ? '$' : '';
+                            const suffix = i === 0 ? 'M' : (i === 1 ? ' states' : (i === 2 ? 'K members' : ' agents'));
+                            return ctx.dataset.label + ': ' + prefix + ctx.raw + suffix;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(v) { return v; }
+                    }
+                }
+            }
+        }
+    });
+
+    // Synergy Chart
+    new Chart(document.getElementById('synergyChart'), {
+        type: 'radar',
+        data: {
+            labels: ['Reinsurance Leverage', 'Technology Investment', 'Risk Diversification', 'Market Expansion', 'Operational Efficiency', 'Capital Optimization'],
+            datasets: [{
+                label: 'Synergy Potential (1-10)',
+                data: [8, 9, 8, 10, 7, 9],
+                borderColor: primary,
+                backgroundColor: primary + '30',
+                pointBackgroundColor: primary
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: { r: { beginAtZero: true, max: 10 } }
+        }
+    });
+
+    // Risk Diversification
+    new Chart(document.getElementById('riskDiversification'), {
+        type: 'bar',
+        data: {
+            labels: ['Wildfire', 'Hail', 'Winter Storm', 'Drought/Crop', 'Auto Freq.', 'Liability'],
+            datasets: [
+                { label: 'Idaho Exposure', data: [9, 3, 5, 4, 6, 5], backgroundColor: primary + 'AA', borderRadius: 4 },
+                { label: 'WY/MT Exposure', data: [4, 8, 7, 7, 4, 4], backgroundColor: accent + 'AA', borderRadius: 4 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: { y: { beginAtZero: true, max: 10, title: { display: true, text: 'Relative Exposure (1-10)' } } }
+        }
+    });
+
+    // Combined Ratio
+    new Chart(document.getElementById('combinedRatioChart'), {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [{
+                label: 'Schedule P Loss Ratio %',
+                data: [76.0, 67.4, 76.8, 72.2, 64.6, 61.5, 67.6, 67.1, 74.9, 64.5],
+                borderColor: primary,
+                backgroundColor: primary + '15',
+                fill: true,
+                tension: 0.3,
+                pointRadius: 6,
+                pointBackgroundColor: premiumColors
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { annotation: argallAnnotation }, scales: { y: { min: 55, max: 85, ticks: { callback: v => v + '%' } } } }
+    });
+
+    // Surplus vs Premium (NPE 10yr, surplus 6yr where verified)
+    new Chart(document.getElementById('surplusVsPremium'), {
+        type: 'line',
+        data: {
+            labels: years,
+            datasets: [
+                { label: 'Net Premiums Earned ($M)', data: [166.4, 177.9, 192.8, 210.4, 224.1, 239.0, 249.6, 269.3, 299.4, 341.4], borderColor: primary, tension: 0.3, pointRadius: 5 },
+                { label: 'Surplus ($M)', data: [null, null, null, null, 256.3, 278.6, 301.2, 325.3, 339, 377], borderColor: success, tension: 0.3, pointRadius: 5, spanGaps: true }
+            ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { annotation: argallAnnotation }, scales: { y: { ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Combined Ratio Trend (6-year: 2019-2024) — stacked area showing loss, LAE, expense components
+    new Chart(document.getElementById('fullCombinedRatioChart'), {
+        type: 'line',
+        data: {
+            labels: argallYears,
+            datasets: [
+                { label: 'Loss Ratio %', data: [62.8, 64.2, 64.5, 63.3, 70.3, 61.4], borderColor: danger, backgroundColor: danger + '30', fill: true, tension: 0.3, pointRadius: 5 },
+                { label: 'LAE Ratio %', data: [6.9, 7.2, 6.8, 6.1, 4.8, 5.7], borderColor: '#e67e22', backgroundColor: '#e67e2230', fill: '-1', tension: 0.3, pointRadius: 5 },
+                { label: 'Expense Ratio %', data: [29.3, 27.3, 28.4, 27.1, 26.5, 26.8], borderColor: primaryLight, backgroundColor: primaryLight + '30', fill: '-1', tension: 0.3, pointRadius: 5 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: {
+                annotation: argallAnnotation6,
+                tooltip: {
+                    callbacks: {
+                        afterBody: function(items) {
+                            const idx = items[0].dataIndex;
+                            const combined = [99.0, 98.7, 99.7, 96.5, 101.6, 93.9];
+                            return 'Combined: ' + combined[idx] + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { stacked: true, min: 0, max: 120, ticks: { callback: v => v + '%' } },
+                x: { stacked: true }
+            }
+        }
+    });
+
+    // Historic Growth
+    new Chart(document.getElementById('historicGrowth'), {
+        type: 'bar',
+        data: {
+            labels: ['1947', '1957', '1970s', '1990s', '2010', '2020', '2024', 'Post-Merger'],
+            datasets: [{
+                label: 'Annual Premium ($M, est.)',
+                data: [0.01, 0.1, 5, 50, 150, 257, 401, 800],
+                backgroundColor: [
+                    '#bdc3c7', '#95a5a6', '#7f8c8d', accent, primaryLight, primary, primary, success
+                ],
+                borderRadius: 4
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { ticks: { callback: v => '$' + v + 'M' } } } }
+    });
+
+    // Tab switching
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    // Nav active state
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 80;
+            if (scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>
