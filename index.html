@@ -387,6 +387,7 @@
         <li><a href="#history">History</a></li>
         <li><a href="#pension">Pension</a></li>
         <li><a href="#ai-vision">AI Vision</a></li>
+        <li><a href="#ai-claims">AI Claims Intake</a></li>
         <li><a href="#sources">Sources</a></li>
     </ul>
 </nav>
@@ -1170,6 +1171,493 @@
             <p>A 1-point improvement in combined ratio at FBICI's current premium volume is worth <strong>$3.4M in annual underwriting profit</strong> ($341M NPE × 1%). Across the combined $800M post-merger entity, it's <strong>$8M per year</strong>. AI-driven improvements to claims accuracy, reserve estimation, and underwriting selection can realistically deliver 2–4 points of combined ratio improvement over 3 years — a $16–32M annual impact. The ROI on AI investment isn't theoretical; it's the difference between hovering near breakeven (99% combined) and sustained profitability (93–95%).</p>
             <p style="margin-top:0.75rem;"><strong>This dashboard itself is a demonstration.</strong> Built entirely with AI-assisted development, it extracts, validates, and visualizes data from actual regulatory filings — the same workflow that can be applied to internal actuarial analysis, board reporting, and competitive intelligence.</p>
         </div>
+    </section>
+
+    <!-- AI CLAIMS INTAKE POC -->
+    <section id="ai-claims">
+        <h2 class="section-title">&#129302; AI Claims Intake POC</h2>
+
+        <div class="merger-banner" style="background: linear-gradient(135deg, #e8f4fd 0%, #dceefb 100%); border-color: var(--primary-light);">
+            <h2 style="margin-bottom:0.5rem;">&#127381; Working Pipeline — Wind/Hail Storm Claim CLM-2026-004817</h2>
+            <p>A fully runnable Python pipeline in this repo (<code>insurance-claims-poc/</code>). It generates realistic synthetic claim documents — police report PDF, medical bill PDF, and 4 annotated damage PNGs — then classifies, extracts, and summarizes them into a <strong>Guidewire ClaimCenter REST API v10</strong> payload in 2.3 seconds.</p>
+            <p style="margin-top:0.75rem; background:#fff3; border-radius:6px; padding:0.6rem 0.9rem; font-size:0.85rem; border-left:3px solid var(--primary-light);">
+                <strong>&#128218; Honest framing:</strong> Document extraction is currently <em>simulated</em> (hardcoded structured data that mirrors what would come out of the PDFs). In a production deployment you would swap in <strong>Azure Document Intelligence</strong> or <strong>AWS Textract</strong> for PDF parsing and <strong>GPT-4o Vision / Claude 3.5</strong> for damage photo analysis. The pipeline architecture, Guidewire field mapping, and adjuster flag logic are real and production-ready.
+            </p>
+            <p style="margin-top:0.75rem; font-size:0.85rem; color:var(--text-light);">
+                <strong>Run it:</strong>
+                <code style="background:#fff; padding:2px 6px; border-radius:4px; margin-left:4px;">cd insurance-claims-poc &amp;&amp; pip install -r requirements.txt &amp;&amp; python src/generate_sample_data.py &amp;&amp; cd src &amp;&amp; python dashboard.py</code>
+                → open <a href="http://localhost:5050" target="_blank">http://localhost:5050</a>
+            </p>
+        </div>
+
+        <!-- Pipeline Steps Indicator -->
+        <div class="chart-card" style="margin-top:1.5rem; padding:1rem 1.5rem;">
+            <div style="display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+                    <span style="color:var(--success); font-weight:700;">&#10003;</span>
+                    <span>Document Classification</span>
+                </div>
+                <span style="color:var(--text-light);">&#8594;</span>
+                <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+                    <span style="color:var(--success); font-weight:700;">&#10003;</span>
+                    <span>AI Data Extraction</span>
+                </div>
+                <span style="color:var(--text-light);">&#8594;</span>
+                <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+                    <span style="color:var(--success); font-weight:700;">&#10003;</span>
+                    <span>Damage Analysis</span>
+                </div>
+                <span style="color:var(--text-light);">&#8594;</span>
+                <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+                    <span style="color:var(--success); font-weight:700;">&#10003;</span>
+                    <span>Claim Summary</span>
+                </div>
+                <span style="color:var(--text-light);">&#8594;</span>
+                <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem;">
+                    <span style="color:var(--success); font-weight:700;">&#10003;</span>
+                    <span>Guidewire Export</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Stats Row -->
+        <div class="grid grid-4" style="margin-top:1.5rem;">
+            <div class="card" style="border-left:4px solid var(--danger);">
+                <h3>Overall Severity</h3>
+                <div class="value" style="color:var(--danger);">SEVERE</div>
+                <div class="change">11 damage items identified</div>
+            </div>
+            <div class="card">
+                <h3>Documents Processed</h3>
+                <div class="value">6</div>
+                <div class="change">2 PDFs + 4 photos</div>
+            </div>
+            <div class="card">
+                <h3>Property Estimate</h3>
+                <div class="value">$47,250</div>
+                <div class="change">Preliminary — from police report</div>
+            </div>
+            <div class="card">
+                <h3>Medical Charges</h3>
+                <div class="value">$2,045</div>
+                <div class="change">2 diagnosis codes</div>
+            </div>
+            <div class="card">
+                <h3>Processing Time</h3>
+                <div class="value">2.3s</div>
+                <div class="change positive">vs ~45 min manual</div>
+            </div>
+            <div class="card">
+                <h3>Fields Extracted</h3>
+                <div class="value">24</div>
+                <div class="change">13 police + 11 medical</div>
+            </div>
+            <div class="card">
+                <h3>GW Fields Mapped</h3>
+                <div class="value">28</div>
+                <div class="change">ClaimCenter REST API v10</div>
+            </div>
+            <div class="card">
+                <h3>Adjuster Flags</h3>
+                <div class="value" style="color:var(--warning);">4</div>
+                <div class="change">HIGH_SEV · BI · MULTI · LOW_CONF</div>
+            </div>
+        </div>
+
+        <!-- Adjuster Flags -->
+        <div style="margin-top:1.5rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.2rem; background:#fffbeb; border:1px solid #fef3c7; border-radius:8px; margin-bottom:0.6rem; font-size:0.9rem; font-weight:500; color:#92400e;">
+                <span>&#128993;</span>
+                <span><strong>HIGH_SEVERITY:</strong> Claim assessed as SEVERE severity — prioritize assignment</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.2rem; background:#fff5f5; border:1px solid #fed7d7; border-radius:8px; margin-bottom:0.6rem; font-size:0.9rem; font-weight:500; color:#c53030;">
+                <span>&#128308;</span>
+                <span><strong>BODILY_INJURY:</strong> Bodily injury reported — medical charges: $2,045.00</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.2rem; background:#fffbeb; border:1px solid #fef3c7; border-radius:8px; margin-bottom:0.6rem; font-size:0.9rem; font-weight:500; color:#92400e;">
+                <span>&#128993;</span>
+                <span><strong>MULTIPLE_STRUCTURES:</strong> Multiple major damage items — consider field inspection</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.2rem; background:#ebf8ff; border:1px solid #bee3f8; border-radius:8px; margin-bottom:0.6rem; font-size:0.9rem; font-weight:500; color:#2b6cb0;">
+                <span>&#8505;&#65039;</span>
+                <span><strong>LOW_CONFIDENCE:</strong> One or more documents had low classification confidence</span>
+            </div>
+        </div>
+
+        <!-- Main 2-column grid -->
+        <div class="grid grid-2" style="margin-top:1.5rem;">
+
+            <!-- Documents Classified -->
+            <div class="chart-card">
+                <h3>&#128193; Documents Classified</h3>
+                <div style="display:flex; justify-content:flex-end; margin-top:0.25rem; margin-bottom:0.25rem;">
+                    <span style="font-size:0.72rem; color:var(--text-light); font-style:italic;">Classification confidence &rarr;</span>
+                </div>
+                <div>
+                    <div style="display:flex; align-items:center; padding:0.6rem 0; border-bottom:1px solid var(--border); gap:0.75rem;">
+                        <span style="font-size:1.3rem;">&#128203;</span>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; font-size:0.9rem;">police_report_BPD-2026-041200387.pdf</div>
+                            <div style="font-size:0.8rem; color:var(--text-light);">Police / Incident Report</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65rem; color:var(--text-light); margin-bottom:2px;">Confidence</div>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:600; background:#c6f6d5; color:#22543d;">92%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:0.6rem 0; border-bottom:1px solid var(--border); gap:0.75rem;">
+                        <span style="font-size:1.3rem;">&#127973;</span>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; font-size:0.9rem;">medical_bill_Henderson.pdf</div>
+                            <div style="font-size:0.8rem; color:var(--text-light);">Medical Bill / Statement</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65rem; color:var(--text-light); margin-bottom:2px;">Confidence</div>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:600; background:#c6f6d5; color:#22543d;">90%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:0.6rem 0; border-bottom:1px solid var(--border); gap:0.75rem;">
+                        <span style="font-size:1.3rem;">&#128247;</span>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; font-size:0.9rem;">damage_hail_siding_closeup.png</div>
+                            <div style="font-size:0.8rem; color:var(--text-light);">Damage Photograph</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65rem; color:var(--text-light); margin-bottom:2px;">Confidence</div>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:600; background:#c6f6d5; color:#22543d;">95%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:0.6rem 0; border-bottom:1px solid var(--border); gap:0.75rem;">
+                        <span style="font-size:1.3rem;">&#128247;</span>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; font-size:0.9rem;">damage_interior_water.png</div>
+                            <div style="font-size:0.8rem; color:var(--text-light);">Damage Photograph</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65rem; color:var(--text-light); margin-bottom:2px;">Confidence</div>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:600; background:#c6f6d5; color:#22543d;">95%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:0.6rem 0; border-bottom:1px solid var(--border); gap:0.75rem;">
+                        <span style="font-size:1.3rem;">&#128247;</span>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; font-size:0.9rem;">damage_roof_overview.png</div>
+                            <div style="font-size:0.8rem; color:var(--text-light);">Damage Photograph</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65rem; color:var(--text-light); margin-bottom:2px;">Confidence</div>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:600; background:#c6f6d5; color:#22543d;">95%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; align-items:center; padding:0.6rem 0; gap:0.75rem;">
+                        <span style="font-size:1.3rem;">&#128247;</span>
+                        <div style="flex:1;">
+                            <div style="font-weight:600; font-size:0.9rem;">damage_vehicle_hail.png</div>
+                            <div style="font-size:0.8rem; color:var(--text-light);">Damage Photograph</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:0.65rem; color:var(--text-light); margin-bottom:2px;">Confidence</div>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:600; background:#c6f6d5; color:#22543d;">95%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Damage Assessment -->
+            <div class="chart-card">
+                <h3>&#128269; AI Damage Assessment — 11 Items</h3>
+                <div style="margin-top:0.5rem;">
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Roof shingles</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fed7d7; color:#742a2a;">Major</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Missing/displaced — ~40% of roof surface</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Detached garage</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fed7d7; color:#742a2a;">Major</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Structural (fallen tree) — Roof and north wall</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Windows</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fefcbf; color:#744210;">Moderate</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Cracked glass — 2 of 4 visible windows</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Ceiling</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fed7d7; color:#742a2a;">Major</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Water stain/saturation — ~3ft diameter area</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Carpet</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fed7d7; color:#742a2a;">Major</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Water saturation — ~8ft x 6ft section</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Vehicle hood</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fed7d7; color:#742a2a;">Major</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Hail dents — ~40 impact points</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Windshield</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fed7d7; color:#742a2a;">Major</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Cracked — Multiple crack lines</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Vinyl siding</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fefcbf; color:#744210;">Moderate</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Hail dents/impacts — ~25 visible impact points</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Vinyl siding (cracking)</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fefcbf; color:#744210;">Moderate</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Cracking — 2 visible cracks</div>
+                    </div>
+                    <div style="padding:0.6rem 0; border-bottom:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Wall paint</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fefcbf; color:#744210;">Moderate</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Peeling/bubbling — Below leak area</div>
+                    </div>
+                    <div style="padding:0.6rem 0;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span style="font-weight:600; font-size:0.9rem;">Landscaping</span>
+                            <span style="font-size:0.75rem; padding:3px 10px; border-radius:12px; font-weight:700; text-transform:uppercase; background:#fefcbf; color:#744210;">Moderate</span>
+                        </div>
+                        <div style="font-size:0.8rem; color:var(--text-light); margin-top:2px;">Uprooted tree, hail debris — Front yard</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Evidence — REAL generated PNGs -->
+            <div class="chart-card">
+                <h3>&#128247; Raw Input Photos — Generated by Pipeline</h3>
+                <p style="font-size:0.82rem; color:var(--text-light); margin-bottom:0.75rem;">These are the actual PNG files produced by <code>src/generate_sample_data.py</code> — synthetic damage illustrations with adjuster metadata stamps. In production these would be real field photos from an adjuster's phone or uploaded at FNOL.</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+                    <div style="border-radius:8px; overflow:hidden; border:2px solid var(--border);">
+                        <img src="insurance-claims-poc/data/sample_photos/damage_roof_overview.png" alt="Roof overview damage photo" style="width:100%; height:160px; object-fit:cover; display:block;">
+                        <div style="padding:6px 10px; background:#f8fafc; font-size:0.75rem; color:var(--text-light); display:flex; justify-content:space-between; align-items:center;">
+                            <span>damage_roof_overview.png — Photo 1 of 4</span>
+                            <span style="background:#fed7d7; color:#742a2a; padding:2px 7px; border-radius:10px; font-size:0.7rem; font-weight:700;">MAJOR</span>
+                        </div>
+                    </div>
+                    <div style="border-radius:8px; overflow:hidden; border:2px solid var(--border);">
+                        <img src="insurance-claims-poc/data/sample_photos/damage_hail_siding_closeup.png" alt="Hail siding closeup" style="width:100%; height:160px; object-fit:cover; display:block;">
+                        <div style="padding:6px 10px; background:#f8fafc; font-size:0.75rem; color:var(--text-light); display:flex; justify-content:space-between; align-items:center;">
+                            <span>damage_hail_siding_closeup.png — Photo 2 of 4</span>
+                            <span style="background:#fefcbf; color:#744210; padding:2px 7px; border-radius:10px; font-size:0.7rem; font-weight:700;">MODERATE</span>
+                        </div>
+                    </div>
+                    <div style="border-radius:8px; overflow:hidden; border:2px solid var(--border);">
+                        <img src="insurance-claims-poc/data/sample_photos/damage_interior_water.png" alt="Interior water damage" style="width:100%; height:160px; object-fit:cover; display:block;">
+                        <div style="padding:6px 10px; background:#f8fafc; font-size:0.75rem; color:var(--text-light); display:flex; justify-content:space-between; align-items:center;">
+                            <span>damage_interior_water.png — Photo 3 of 4</span>
+                            <span style="background:#fed7d7; color:#742a2a; padding:2px 7px; border-radius:10px; font-size:0.7rem; font-weight:700;">MAJOR</span>
+                        </div>
+                    </div>
+                    <div style="border-radius:8px; overflow:hidden; border:2px solid var(--border);">
+                        <img src="insurance-claims-poc/data/sample_photos/damage_vehicle_hail.png" alt="Vehicle hail damage" style="width:100%; height:160px; object-fit:cover; display:block;">
+                        <div style="padding:6px 10px; background:#f8fafc; font-size:0.75rem; color:var(--text-light); display:flex; justify-content:space-between; align-items:center;">
+                            <span>damage_vehicle_hail.png — Photo 4 of 4</span>
+                            <span style="background:#fed7d7; color:#742a2a; padding:2px 7px; border-radius:10px; font-size:0.7rem; font-weight:700;">MAJOR</span>
+                        </div>
+                    </div>
+                </div>
+                <p style="font-size:0.78rem; color:var(--text-light); margin-top:0.75rem; font-style:italic;">In production: adjuster submits photos at FNOL via <strong>drag-and-drop portal</strong> or they arrive via <strong>auto-detection</strong> from a monitored SharePoint folder, email attachment pipeline, or S3 bucket — no human action required for the latter.</p>
+            </div>
+
+            <!-- Medical Bill Extraction -->
+            <div class="chart-card">
+                <h3>&#127973; Medical Bill Extraction</h3>
+                <p style="font-size:0.85rem; margin-bottom:0.75rem; margin-top:0.25rem;">
+                    <strong>St. Luke's Regional Medical Center</strong><br>
+                    Patient: Robert J. Henderson &nbsp;|&nbsp; DOS: 2026-04-12<br>
+                    Physician: Dr. Sarah M. Kim, MD
+                </p>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <thead>
+                            <tr><th>Code</th><th>Description</th><th style="text-align:right">Amount</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>99283</td><td>Emergency Dept Visit – Moderate</td><td class="number">$1,245.00</td></tr>
+                            <tr><td>73030</td><td>X-Ray, Shoulder (2 views)</td><td class="number">$385.00</td></tr>
+                            <tr><td>29105</td><td>Splint Application, Long Arm</td><td class="number">$290.00</td></tr>
+                            <tr><td>99070</td><td>Supplies / Materials</td><td class="number">$125.00</td></tr>
+                            <tr style="font-weight:700; background:#f8f9fb;">
+                                <td></td><td><strong>TOTAL CHARGES</strong></td><td class="number" style="border-top:2px solid var(--primary);"><strong>$2,045.00</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.75rem;">
+                    <strong>Diagnosis:</strong> S40.011A (Contusion right shoulder), S51.811A (Laceration right forearm)<br>
+                    <strong>Context:</strong> Sustained during storm event while securing property. ER 3:15 AM, discharged same day.
+                </p>
+                <p style="font-size:0.8rem; margin-top:0.5rem;">
+                    <span style="background:#c6f6d5; color:#22543d; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600;">11 fields extracted</span>
+                    <span style="background:#bee3f8; color:#2b6cb0; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600; margin-left:6px;">91% confidence</span>
+                </p>
+            </div>
+
+            <!-- Extracted Claim Information -->
+            <div class="chart-card">
+                <h3>&#128203; Extracted Claim Information</h3>
+                <div style="overflow-x:auto; margin-top:0.25rem;">
+                    <table>
+                        <tbody>
+                            <tr><td style="width:35%; font-weight:600; color:var(--text-light); font-size:0.85rem;">Report #</td><td style="font-size:0.85rem;">BPD-2026-041200387</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Date / Time</td><td style="font-size:0.85rem;">2026-04-12 at 02:35</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Incident Type</td><td style="font-size:0.85rem;">Wind/Hail Storm Damage</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Location</td><td style="font-size:0.85rem;">4521 Maple Creek Dr, Boise, ID 83702</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Officer</td><td style="font-size:0.85rem;">Officer David M. Torres (BPD-4412)</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Insured</td><td style="font-size:0.85rem;">Robert J. Henderson</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Phone</td><td style="font-size:0.85rem;">(208) 555-0147</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Estimate</td><td style="font-size:0.85rem; font-weight:600;">$47,250.00</td></tr>
+                            <tr><td style="font-weight:600; color:var(--text-light); font-size:0.85rem;">Weather Ref</td><td style="font-size:0.8rem;">NWS Boise – Severe Thunderstorm Warning #0412-026</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.75rem;">
+                    <strong>Narrative:</strong> Severe thunderstorm with 65 mph winds and golf-ball-sized hail. Damage to roof, siding, windows, landscaping. Large oak tree fell on detached garage. Water intrusion in master bedroom.
+                </p>
+                <p style="font-size:0.8rem; margin-top:0.5rem;">
+                    <span style="background:#c6f6d5; color:#22543d; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600;">13 fields extracted</span>
+                    <span style="background:#bee3f8; color:#2b6cb0; padding:2px 8px; border-radius:10px; font-size:0.75rem; font-weight:600; margin-left:6px;">94% confidence</span>
+                </p>
+            </div>
+
+            <!-- Guidewire ClaimCenter Export -->
+            <div class="chart-card" style="grid-column: 1 / -1;">
+                <h3>&#9889; Guidewire ClaimCenter Export — REST API v10 Payload</h3>
+                <p style="font-size:0.85rem; color:var(--text-light); margin-bottom:0.75rem;">
+                    28 fields mapped &nbsp;&#183;&nbsp; 2 exposures (PropertyDamage + BodilyInjury) &nbsp;&#183;&nbsp; Ready for import
+                </p>
+                <pre style="background:#1e293b; color:#e2e8f0; border-radius:8px; padding:1rem; font-family:'SF Mono','Fira Code',monospace; font-size:0.78rem; overflow-x:auto; max-height:400px; overflow-y:auto; line-height:1.5;">{
+  "data": {
+    "attributes": {
+      "claimNumber": "CLM-2026-004817",
+      "policyNumber": "HO-FB-2024-991203",
+      "lossDate": "2026-04-12",
+      "lossType": {
+        "code": "WindAndHail",
+        "name": "Wind/Hail Storm Damage"
+      },
+      "lossCause": {
+        "code": "weather_storm",
+        "name": "Weather - Severe Storm"
+      },
+      "lossLocation": {
+        "addressLine1": "4521 Maple Creek Dr",
+        "city": "Boise",
+        "state": "ID",
+        "postalCode": "83702"
+      },
+      "reporter": {
+        "displayName": "Robert J. Henderson",
+        "primaryPhone": "(208) 555-0147"
+      },
+      "severity": {
+        "code": "severe",
+        "name": "SEVERE"
+      },
+      "description": "AI-processed claim intake: 11 damage items identified across 6 documents. Overall severity: SEVERE. Preliminary estimate: $47,250.00."
+    },
+    "exposures": [
+      {
+        "exposureType": "PropertyDamage",
+        "lossParty": "insured",
+        "severity": "severe",
+        "description": "11 damage items identified by AI analysis",
+        "estimatedAmount": 47250.00
+      },
+      {
+        "exposureType": "BodilyInjury",
+        "lossParty": "insured",
+        "description": "Sustained during storm event while securing property",
+        "diagnosisCodes": ["S40.011A", "S51.811A"],
+        "medicalCharges": 2045.00
+      }
+    ]
+  }
+}</pre>
+            </div>
+
+        </div><!-- end main grid -->
+
+        <!-- Intake Modes -->
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>&#128260; Two Intake Modes — Both Supported by This Pipeline</h3>
+            <div class="grid grid-2" style="margin-top:1rem;">
+                <div style="background:#f0f7ff; border-radius:8px; padding:1rem; border-left:4px solid var(--primary-light);">
+                    <p style="font-weight:700; font-size:0.95rem; color:var(--primary); margin-bottom:0.5rem;">&#128229; Mode A: Drag-and-Drop FNOL Portal</p>
+                    <p style="font-size:0.88rem; color:var(--text);">Adjuster or policyholder uploads documents directly at claim creation. A browser-based portal (the Flask dashboard running on port 5050) accepts PDFs, images, or ZIP bundles via a drop zone. The pipeline runs immediately and returns a structured summary + Guidewire payload within seconds. Ideal for field adjusters using tablets at the loss site.</p>
+                    <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.5rem;"><strong>Trigger:</strong> Manual upload → webhook → pipeline → ClaimCenter POST</p>
+                </div>
+                <div style="background:#f0fff4; border-radius:8px; padding:1rem; border-left:4px solid var(--success);">
+                    <p style="font-weight:700; font-size:0.95rem; color:#1a6b3a; margin-bottom:0.5rem;">&#128268; Mode B: Auto-Detection (No Human Action)</p>
+                    <p style="font-size:0.88rem; color:var(--text);">A folder-watcher or message queue monitors a SharePoint library, an S3 bucket, or an email-to-document pipeline for new arrivals. Documents are classified and processed the moment they land — from fax-to-PDF converters, imaging centers sending medical records, or adjusters syncing from mobile apps. Zero manual handoff.</p>
+                    <p style="font-size:0.8rem; color:var(--text-light); margin-top:0.5rem;"><strong>Trigger:</strong> File system event / SQS message → pipeline → ClaimCenter POST</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Differentiation vs Vendors -->
+        <div style="margin-top:1.5rem;">
+            <h3 style="font-size:1rem; font-weight:600; color:var(--primary); margin-bottom:0.75rem; padding-bottom:0.4rem; border-bottom:3px solid var(--accent); display:inline-block;">&#9878;&#65039; Why This Isn't Just "What Vendors Already Do"</h3>
+            <div class="grid grid-2" style="margin-top:1rem;">
+
+                <div class="chart-card" style="border-top:3px solid var(--danger);">
+                    <h3 style="color:var(--danger);">&#128683; What Vendor AI Gives You</h3>
+                    <ul style="font-size:0.88rem; color:var(--text); list-style:none; padding:0; margin-top:0.5rem;">
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10005; &nbsp;Black-box models — no access to confidence scores, extraction logic, or error traces</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10005; &nbsp;Works on standard Guidewire/Duck Creek configs — any customization is a project</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10005; &nbsp;18–36 month implementation timelines with SI partners</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10005; &nbsp;$200K–$2M+ annual contract pricing for regional carriers</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10005; &nbsp;PII-bearing claim documents leave your network to vendor cloud</li>
+                        <li style="padding:0.4rem 0;">&#10005; &nbsp;Quarterly release cycles — can't fix a bad extraction rule for 90 days</li>
+                    </ul>
+                </div>
+
+                <div class="chart-card" style="border-top:3px solid var(--success);">
+                    <h3 style="color:#1a6b3a;">&#10003; What an Internal AI Engineer Gives You</h3>
+                    <ul style="font-size:0.88rem; color:var(--text); list-style:none; padding:0; margin-top:0.5rem;">
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10003; &nbsp;Full source code — every extraction rule, field mapping, and flag condition is auditable</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10003; &nbsp;Built against <em>your</em> ClaimCenter configuration, loss codes, and adjuster workflow</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10003; &nbsp;Working POC in days — production-grade in weeks, not years</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10003; &nbsp;Marginal cost is compute only — model APIs run pennies per claim</li>
+                        <li style="padding:0.4rem 0; border-bottom:1px solid var(--border);">&#10003; &nbsp;Data stays on your infrastructure — no contract clauses about model training on your claims</li>
+                        <li style="padding:0.4rem 0;">&#10003; &nbsp;Fix a bad extraction rule this afternoon and deploy it today</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="insight-box" style="margin-top:1rem;">
+                <h4>&#127919; The Real Value-Add: Insurance Domain Knowledge + Engineering Depth</h4>
+                <p>The hard part of AI claims intake isn't running a vision model on a photo. It's knowing that a <strong>wind/hail loss</strong> in Idaho maps to LOB "Homeowners" not "Farmowners," that a combined roof + detached structure loss may trigger two separate reserve lines in ClaimCenter, that BI coverage on a homeowners claim requires a different exposure type than the property damage, and that a preliminary estimate from a BPD police report must be flagged as <em>unofficial</em> until an adjuster-verified estimate supersedes it. That context-aware logic is what makes the Guidewire payload actually importable without adjuster rework — and it's what vendors selling generic document AI can't give you without a multi-year customization engagement.</p>
+                <p style="margin-top:0.75rem;">This dashboard is a working example of the same pattern applied to financial analysis: raw regulatory filings (PDFs) → structured extraction → insight generation. The same skill set that built this applies directly to FBICI's claims, actuarial reporting, and IT workflows.</p>
+            </div>
+        </div>
+
     </section>
 
     <!-- SOURCES -->
