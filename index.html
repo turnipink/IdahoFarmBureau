@@ -1121,55 +1121,213 @@
 
     <!-- AI VISION -->
     <section id="ai-vision">
-        <h2 class="section-title">AI Integration — The Next Competitive Edge</h2>
+        <h2 class="section-title">AI Integration — Human-Led, AI-Assisted</h2>
 
         <div class="merger-banner" style="background: linear-gradient(135deg, #e8f4fd 0%, #dceefb 100%); border-color: var(--primary-light);">
-            <h2 style="margin-bottom:0.5rem;">&#129302; Why This Matters for FBICI</h2>
-            <p>The insurance industry is entering an AI transformation cycle. Carriers that integrate AI into core operations — not just marketing — will compound efficiency gains across underwriting, claims, and IT. With $757M in assets, 11 lines of business, and a post-merger footprint spanning 5 states, FBICI is at the ideal inflection point to invest in AI capabilities before competitors.</p>
+            <h2 style="margin-bottom:0.5rem;">&#129309; The Philosophy: AI Doesn't Replace Your People — It Backs Them Up</h2>
+            <p>Insurance is a relationship business. FBICI's underwriters, adjusters, and agents are the product. The right AI strategy keeps every customer-facing decision in human hands, then layers a tireless second set of eyes on top — reviewing what the human wrote, surfacing what they couldn't have known, and handling the paperwork they shouldn't have to. <strong>The human signs the policy. The AI catches the missed coverage, the stale property value, and the call transcript nobody had time to read.</strong></p>
+            <p style="margin-top:0.75rem; background:#fff6; border-radius:6px; padding:0.6rem 0.9rem; font-size:0.88rem; border-left:3px solid var(--primary);">
+                <strong>Trust model:</strong> Every AI output is a <em>recommendation with a citation</em> — never an autonomous action. An underwriter sees "AI flagged this — here's the source document and the confidence level." They accept, modify, or override. The audit trail records both. This is how regulators, reinsurers, and your own people get comfortable.
+            </p>
         </div>
 
+        <!-- The Augmentation Model -->
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>&#128101; The Augmentation Model — What the Human Does vs What the AI Does</h3>
+            <div style="overflow-x:auto; margin-top:0.75rem;">
+                <table>
+                    <thead>
+                        <tr><th>Workflow</th><th style="background:#1a3a5c; color:#fff;">Human Decision (always)</th><th style="background:#2a5a8c; color:#fff;">AI Assistance (background)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>New Underwriting</strong></td><td>Write the policy, set terms, bind coverage</td><td>Review the bound policy against property photos, public records, and prior emails — flag missing endorsements or coverage gaps</td></tr>
+                        <tr><td><strong>Annual Policy Review</strong></td><td>Approve renewal &amp; rate changes</td><td>Auto-pull updated property values (county assessor), business registration changes (Sec. of State), satellite/aerial imagery — produce a one-page renewal brief</td></tr>
+                        <tr><td><strong>Claims FNOL</strong></td><td>Adjuster owns the claim, talks to the insured</td><td>Transcribe the call, summarize the voicemail, classify documents, pre-fill Guidewire fields, suggest a reserve range</td></tr>
+                        <tr><td><strong>Reserves</strong></td><td>Actuary sets the number</td><td>Mine 10+ years of Schedule P data to surface similar prior claims and their actual ultimate cost</td></tr>
+                        <tr><td><strong>Code &amp; IT</strong></td><td>Engineer designs &amp; reviews the code</td><td>Generate first-draft code, write unit tests, scan for bugs &amp; security issues, document legacy systems</td></tr>
+                        <tr><td><strong>Regulatory Filings</strong></td><td>CFO/Controller signs the statement</td><td>Cross-reference exhibits, flag inconsistencies, draft MD&amp;A narrative from the underlying numbers</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.82rem; color:var(--text-light); margin-top:0.75rem; font-style:italic;">In every row, the human keeps authority. The AI removes the toil, surfaces what was hidden, and never sleeps.</p>
+        </div>
+
+        <!-- UNDERWRITING DEEP DIVE -->
         <div class="grid grid-2" style="margin-top:1.5rem;">
             <div class="chart-card">
-                <h3>&#9889; Claims & Underwriting Automation</h3>
-                <div style="padding:0.5rem 0;">
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Automatic Damage Estimation</strong> — Computer vision models can analyze photos of property damage (hail, fire, auto collision) and generate preliminary repair estimates in seconds. This cuts days from the FNOL-to-estimate cycle and reduces adjuster windshield time.</p>
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Reserve Estimation</strong> — Machine learning models trained on FBICI's 10+ years of Schedule P loss development data can predict ultimate losses by line of business earlier and more accurately, improving reserve adequacy and reducing the surprise factor that drove the 2023 spike to 101.6% combined ratio.</p>
-                    <p style="font-size:0.9rem; color:var(--text);"><strong>Underwriting Triage</strong> — AI scoring models can flag high-severity risk submissions (wildfire-prone properties, commercial auto fleets) for senior underwriter review while fast-tracking standard farm and homeowners policies through automated decisioning.</p>
-                </div>
+                <h3>&#128221; Underwriting — A Second Set of Eyes That Never Tires</h3>
+                <p style="font-size:0.9rem; color:var(--text); margin-bottom:0.75rem;">A senior underwriter writes a farmowners policy in 20 minutes. They are good. But they cannot read the 47-email thread with the agent, look at the 12 property photos the insured uploaded last spring, listen to the recorded inspection call, <em>and</em> pull the latest county assessor value — all in those 20 minutes. AI can. After the policy is bound, an AI agent runs in the background and produces a one-page <strong>"Coverage Review"</strong> for the underwriter to glance at:</p>
+                <ul style="font-size:0.88rem; color:var(--text); margin-left:1.2rem; line-height:1.7;">
+                    <li><strong>Photo evidence</strong> — &ldquo;Photos show a detached 2,400 sq ft outbuilding not listed on the dwelling schedule.&rdquo;</li>
+                    <li><strong>Email thread mining</strong> — &ldquo;Insured mentioned a grain bin addition in March email; not reflected on the application.&rdquo;</li>
+                    <li><strong>Call transcript review</strong> — &ldquo;During inspection call, insured noted a part-time custom hay-baling side business. Verify Farm Liability vs CGL coverage.&rdquo;</li>
+                    <li><strong>Public data cross-check</strong> — &ldquo;Idaho Sec. of State shows insured registered an LLC in 2025; current policy is in personal name only.&rdquo;</li>
+                </ul>
+                <p style="font-size:0.85rem; color:var(--text); margin-top:0.75rem; background:#f0f9ff; border-left:3px solid var(--primary-light); padding:0.5rem 0.75rem; border-radius:4px;"><strong>Outcome:</strong> Underwriter spends 90 seconds reviewing the brief, accepts or modifies the recommendations, and the policy goes out the door with proper coverage — protecting the insured and FBICI from a future denied claim or E&amp;O exposure.</p>
             </div>
             <div class="chart-card">
-                <h3>&#128202; Data Analytics & Decision Intelligence</h3>
-                <div style="padding:0.5rem 0;">
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Natural Language Data Queries</strong> — LangChain-powered interfaces let actuaries and executives ask plain-English questions like <em>"What is our 3-year loss development factor for Idaho farmowners?"</em> and get instant answers from structured data — no SQL or BI tool expertise required.</p>
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Regulatory Filing Automation</strong> — AI agents can cross-reference annual statement exhibits (Schedule P, Schedule H, Five-Year Historical Data) to pre-populate statutory filings and flag inconsistencies before submission — reducing preparer hours and compliance risk.</p>
-                    <p style="font-size:0.9rem; color:var(--text);"><strong>Portfolio Monitoring</strong> — Continuous AI-driven analysis of premium vs loss trends by line, geography, and agent to identify emerging profitability issues or growth opportunities across the combined 5-state footprint.</p>
-                </div>
+                <h3>&#128197; Automatic Annual Policy Reviews from Public Data</h3>
+                <p style="font-size:0.9rem; color:var(--text); margin-bottom:0.75rem;">Today, most renewals on a clean account get a rate change and a signature. Property values, business activity, and risk profile drift silently between renewals. AI agents can run a continuous background sweep on every active policy using <strong>data that is already public and free</strong> in every state FBICI &amp; Mountain West write in:</p>
+                <ul style="font-size:0.88rem; color:var(--text); margin-left:1.2rem; line-height:1.7;">
+                    <li><strong>County assessor reappraisals</strong> &mdash; Montana (statewide property.mt.gov), Idaho (county portals + Tax Commission rolls), Oregon (ORMAP + county portals), Washington (county portals + DOR), Wyoming (county portals). Property reappraised at +28% since last renewal &rarr; Coverage A may be inadequate.</li>
+                    <li><strong>Secretary of State business filings</strong> &mdash; All 5 states have free public business-entity search. Insured added two new DBAs &rarr; commercial coverage gap.</li>
+                    <li><strong>Aerial / satellite imagery</strong> &mdash; USDA NAIP (free, refreshed every 2&ndash;3 yrs) plus county GIS. New outbuilding visible on latest imagery not on the policy schedule.</li>
+                    <li><strong>NOAA &amp; wildfire perimeter data</strong> &mdash; NIFC, USFS, and state DNR feeds are all free APIs. Property now within 1 mile of a designated WUI zone &rarr; revisit deductible &amp; exclusion language.</li>
+                    <li><strong>FMCSA registrations</strong> &mdash; Free federal API for any commercial-auto insured. Added 4 power units mid-term &rarr; premium audit needed.</li>
+                </ul>
+                <p style="font-size:0.85rem; color:var(--text); margin-top:0.75rem; background:#f0f9ff; border-left:3px solid var(--primary-light); padding:0.5rem 0.75rem; border-radius:4px;"><strong>Outcome:</strong> The renewal underwriter opens the file and the brief is already there. No more &ldquo;we didn't know&rdquo; surprises. Premium leakage closes. E&amp;O exposure shrinks. Same headcount, vastly better risk selection.</p>
             </div>
         </div>
 
+        <!-- CLAIMS / RESERVES / VOICE -->
         <div class="grid grid-2" style="margin-top:1.5rem;">
             <div class="chart-card">
-                <h3>&#128187; IT Operations & Engineering</h3>
-                <div style="padding:0.5rem 0;">
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>AI-Assisted Code Development</strong> — AI copilot tools accelerate development velocity by 30–50% on internal applications, policy admin integrations, and data pipelines. Every engineer becomes more productive.</p>
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Intelligent Debugging & Monitoring</strong> — AI models analyze production logs, correlate error patterns, and suggest root causes — reducing mean-time-to-resolution for system outages that directly impact agents and policyholders.</p>
-                    <p style="font-size:0.9rem; color:var(--text);"><strong>Legacy System Migration</strong> — As the Mountain West integration proceeds, AI can accelerate data mapping, code conversion, and testing of legacy policy administration systems — the most time-consuming and error-prone part of any carrier merger.</p>
-                </div>
+                <h3>&#128222; Voicemail, Call, &amp; Email Summarization</h3>
+                <p style="font-size:0.9rem; color:var(--text); margin-bottom:0.75rem;">Every adjuster, agent, and CSR loses an hour a day to listening to voicemails, re-reading email chains, and writing summary notes. AI can do this in real time — privately, on-prem or in a secured cloud tenant:</p>
+                <ul style="font-size:0.88rem; color:var(--text); margin-left:1.2rem; line-height:1.7;">
+                    <li><strong>Voicemail to Guidewire note</strong> — 90-second voicemail becomes a 4-line summary in the claim file with sentiment, action items, and callback urgency.</li>
+                    <li><strong>Call transcript with extraction</strong> — &ldquo;Insured confirmed total loss of 2019 F-250, requested rental authorization, mentioned a passenger injury &mdash; flag for BI investigation.&rdquo;</li>
+                    <li><strong>Email thread digest</strong> — A 30-message thread between adjuster, body shop, and insured collapses to a 6-bullet status with outstanding items highlighted.</li>
+                </ul>
+                <p style="font-size:0.85rem; color:var(--text); margin-top:0.75rem; background:#f0f9ff; border-left:3px solid var(--primary-light); padding:0.5rem 0.75rem; border-radius:4px;"><strong>Time recovered:</strong> ~5 hours/week per adjuster. Across a 40-person claims team, that's <strong>~10,000 hours/year</strong> redirected from administrative work to actual claim resolution.</p>
             </div>
             <div class="chart-card">
-                <h3>&#127919; Strategic Advantage</h3>
-                <div style="padding:0.5rem 0;">
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Post-Merger Integration Accelerator</strong> — Combining two carriers' data, systems, and processes is a multi-year effort. AI-powered data reconciliation and automated testing can compress timelines significantly, realizing the projected synergies faster.</p>
-                    <p style="font-size:0.9rem; color:var(--text); margin-bottom:1rem;"><strong>Agent & Policyholder Experience</strong> — Conversational AI for policy inquiries, coverage recommendations, and first-notice-of-loss intake — giving FBICI's 150+ agents a technology edge that independent agency carriers typically lack.</p>
-                    <p style="font-size:0.9rem; color:var(--text);"><strong>Competitive Moat</strong> — Regional mutual carriers rarely invest in AI. Being first in the Idaho/Mountain West market creates a sustainable advantage in loss ratio improvement, operational efficiency, and talent attraction.</p>
+                <h3>&#128200; Predictive Reserves &amp; Future Claims Activity</h3>
+                <p style="font-size:0.9rem; color:var(--text); margin-bottom:0.75rem;">FBICI sits on a goldmine: 10+ years of Schedule P loss development data, full claim notes, and policy attributes. As an engineer, I'd write the scripts and models that turn that history into forward-looking signals:</p>
+                <ul style="font-size:0.88rem; color:var(--text); margin-left:1.2rem; line-height:1.7;">
+                    <li><strong>Reserve range suggestion</strong> — At day 30 of a new claim, a model returns &ldquo;similar prior claims (n=147) settled at $18K&ndash;$42K; current reserve $25K is in range.&rdquo;</li>
+                    <li><strong>Severity drift detection</strong> — Weekly anomaly scan: &ldquo;Idaho commercial auto BI severity is up 14% YoY in the last 90 days &mdash; reserves on open files may be light.&rdquo;</li>
+                    <li><strong>Claim-frequency forecasting</strong> — Combine NOAA weather, wildfire forecasts, and historical frequency to predict the next quarter's hail/wind/wildfire claim volume by county &mdash; staff and reinsure accordingly.</li>
+                    <li><strong>Adverse development early-warning</strong> — Flag accident-year/LOB combinations developing worse than the actuarial pick before it shows up in the year-end statement.</li>
+                </ul>
+                <p style="font-size:0.85rem; color:var(--text); margin-top:0.75rem; background:#f0f9ff; border-left:3px solid var(--primary-light); padding:0.5rem 0.75rem; border-radius:4px;"><strong>Why this matters:</strong> The 2023 spike to a 101.6% combined ratio was an industry-wide reserve surprise. Earlier signal &rarr; earlier rate action &rarr; smaller surprise.</p>
+            </div>
+        </div>
+
+        <!-- IT / BUILD VS BUY -->
+        <div class="grid grid-2" style="margin-top:1.5rem;">
+            <div class="chart-card">
+                <h3>&#128187; IT, Testing, &amp; the Code Base — Faster, Safer, Cheaper</h3>
+                <p style="font-size:0.9rem; color:var(--text); margin-bottom:0.75rem;">AI in the IT shop isn't about replacing developers. It's about giving the team you already have a 2&ndash;3x productivity multiplier and fewer outages:</p>
+                <ul style="font-size:0.88rem; color:var(--text); margin-left:1.2rem; line-height:1.7;">
+                    <li><strong>Automated test generation</strong> &mdash; AI reads existing code and writes the unit, integration, and regression tests that nobody had time to write. Coverage on legacy modules goes from 20% to 80%+ without adding headcount.</li>
+                    <li><strong>Pre-merge code review</strong> &mdash; Every pull request gets an AI reviewer that catches bugs, security issues, and style violations <em>before</em> a human reviewer is asked. Humans focus on architecture, not typos.</li>
+                    <li><strong>Tool unification</strong> &mdash; A natural-language layer over Guidewire, the GL, the CRM, and the data warehouse means one query interface instead of five tools and five logins.</li>
+                    <li><strong>Clear-rule enforcement</strong> &mdash; Coding standards, data-handling rules, and PHI/PII policies enforced automatically by an AI linter on every commit. Compliance becomes the default, not the audit finding.</li>
+                    <li><strong>Legacy documentation</strong> &mdash; Point AI at an undocumented COBOL or RPG module and get a plain-English spec in minutes &mdash; critical when the original author has retired.</li>
+                </ul>
+            </div>
+            <div class="chart-card">
+                <h3>&#128736;&#65039; Build In-House with Claude &mdash; Own More, Spend Less</h3>
+                <p style="font-size:0.9rem; color:var(--text); margin-bottom:0.75rem;">Carriers FBICI's size routinely pay six- and seven-figure annual fees for SaaS tools that do one thing each &mdash; document intake, claim summarization, BI dashboards, voice transcription, agent portals. Every one of those is now buildable in-house in days-to-weeks with Claude or GPT-class models:</p>
+                <ul style="font-size:0.88rem; color:var(--text); margin-left:1.2rem; line-height:1.7;">
+                    <li><strong>This dashboard</strong> was built end-to-end with Claude in a few sittings &mdash; data extraction from PDFs, validation, charts, narrative. A vendor-built equivalent would have been a 3&ndash;6 month engagement at $50K&ndash;$150K.</li>
+                    <li><strong>The claims intake POC</strong> in this repo is a working pipeline that maps to Guidewire ClaimCenter REST API v10 &mdash; the kind of thing typically purchased as a $200K+/year SaaS module.</li>
+                    <li><strong>Internal tools</strong> &mdash; agent portals, underwriter dashboards, actuarial query interfaces, board-reporting generators &mdash; all become small in-house projects, owned forever, customized to FBICI's exact workflow, with no per-seat license inflation.</li>
+                </ul>
+                <p style="font-size:0.85rem; color:var(--text); margin-top:0.75rem; background:#f0f9ff; border-left:3px solid var(--primary-light); padding:0.5rem 0.75rem; border-radius:4px;"><strong>Strategic shift:</strong> Move from being a buyer of insurance tech to being an owner. Same headcount, more capability, less vendor lock-in, lower long-term cost.</p>
+            </div>
+        </div>
+
+        <!-- ROI / WHY ONE HIRE -->
+        <div class="chart-card" style="margin-top:1.5rem; border-left:4px solid var(--accent);">
+            <h3>&#128257; Merging Two Companies — AI Makes the Hardest Part Manageable</h3>
+            <p style="font-size:0.92rem; color:var(--text); margin-bottom:0.75rem;">The Mountain West acquisition brings together two separate policy admin systems, two claims platforms, two chart-of-accounts structures, two agent management systems, and years of historical data in different schemas. Historically this is where mergers stall, cost overruns happen, and staff burn out. AI changes the calculus on every major integration workstream:</p>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.75rem;">
+                <div style="background:#f8fafc; border-radius:6px; padding:0.9rem 1rem; border-top:3px solid var(--primary-light);">
+                    <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">&#128196; Data Schema Mapping</h4>
+                    <p style="font-size:0.84rem; color:var(--text); line-height:1.6;">Two databases with different field names, data types, and coding conventions. AI can ingest both schemas and generate a candidate field-mapping in hours instead of weeks of analyst time. Engineers review and approve — they don't start from a blank page.</p>
+                </div>
+                <div style="background:#f8fafc; border-radius:6px; padding:0.9rem 1rem; border-top:3px solid var(--primary-light);">
+                    <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">&#9989; Automated Migration Testing</h4>
+                    <p style="font-size:0.84rem; color:var(--text); line-height:1.6;">AI writes the thousands of validation rules needed to verify that every policy, claim, and premium record migrated correctly. Without AI, a team writes a few hundred and hopes. With AI, coverage is exhaustive — edge cases surface before go-live, not after.</p>
+                </div>
+                <div style="background:#f8fafc; border-radius:6px; padding:0.9rem 1rem; border-top:3px solid var(--primary-light);">
+                    <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">&#128218; Legacy Code Understanding</h4>
+                    <p style="font-size:0.84rem; color:var(--text); line-height:1.6;">Mountain West's systems have logic baked in by people who may no longer be with the company. AI can read undocumented code — COBOL, RPG, old Java — and produce plain-English explanations of what each module does, so your engineers aren't flying blind during integration.</p>
+                </div>
+                <div style="background:#f8fafc; border-radius:6px; padding:0.9rem 1rem; border-top:3px solid var(--primary-light);">
+                    <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">&#128101; Staff Onboarding &amp; Knowledge Transfer</h4>
+                    <p style="font-size:0.84rem; color:var(--text); line-height:1.6;">Merging two workforces means 50+ people learning new systems, new workflows, and new colleagues. An AI assistant trained on internal documentation answers "how do I do X in the new system" instantly — reducing supervisor interruptions and shortening time-to-productivity for every affected employee.</p>
+                </div>
+                <div style="background:#f8fafc; border-radius:6px; padding:0.9rem 1rem; border-top:3px solid var(--primary-light);">
+                    <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">&#128269; Data Quality &amp; Deduplication</h4>
+                    <p style="font-size:0.84rem; color:var(--text); line-height:1.6;">Two companies have the same agents, the same policyholders, and the same claimants in overlapping geographies — all spelled and coded differently. AI entity-resolution identifies duplicates, merges records intelligently, and flags conflicts for human review instead of letting bad data flow into the combined system.</p>
+                </div>
+                <div style="background:#f8fafc; border-radius:6px; padding:0.9rem 1rem; border-top:3px solid var(--primary-light);">
+                    <h4 style="font-size:0.9rem; color:var(--primary); margin-bottom:0.4rem;">&#127775; Continuous Progress Monitoring</h4>
+                    <p style="font-size:0.84rem; color:var(--text); line-height:1.6;">An AI integration dashboard tracks migration milestones, test-pass rates, open data defects, and go-live readiness across all workstreams — giving leadership a real-time status view instead of a weekly PowerPoint assembled from a dozen separate status emails.</p>
                 </div>
             </div>
+            <div style="margin-top:1rem; background:#e8f4fd; border-left:3px solid var(--primary); padding:0.65rem 0.9rem; border-radius:4px; font-size:0.87rem; color:var(--text);">
+                <strong>The compounding benefit:</strong> Every AI-assisted merger win — faster data mapping, more test coverage, cleaner records — directly accelerates the synergies already projected in the Mountain West deal. The $800M combined premium entity becomes one coherent operation faster, with less firefighting and less attrition from staff exhausted by manual reconciliation work.
+            </div>
+        </div>
+
+        <!-- ROI / WHY ONE HIRE -->
+        <div class="chart-card" style="margin-top:1.5rem; border-left:4px solid var(--primary);">
+            <h3>&#128176; Why Hiring One AI Integration Engineer Pays for Itself</h3>
+            <p style="font-size:0.92rem; color:var(--text); margin-bottom:0.75rem;">A single engineer focused on AI integration is the highest-leverage hire FBICI can make this year. Here is the math, conservative side:</p>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr><th>Lever</th><th>Mechanism</th><th style="text-align:right;">Annual Value (Conservative)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Combined-ratio improvement</strong></td><td>Better underwriting selection &amp; reserve accuracy &mdash; 1 point on $341M NPE</td><td style="text-align:right;"><strong>$3.4M</strong></td></tr>
+                        <tr><td><strong>Adjuster &amp; CSR time recovered</strong></td><td>5 hrs/wk &times; 40 staff &times; $55/hr fully loaded</td><td style="text-align:right;"><strong>$570K</strong></td></tr>
+                        <tr><td><strong>Underwriting leakage closed</strong></td><td>Annual review catches 0.5% of premium in missed coverage / under-insurance</td><td style="text-align:right;"><strong>$1.7M</strong></td></tr>
+                        <tr><td><strong>Vendor consolidation</strong></td><td>Replace 2&ndash;3 mid-tier SaaS tools with in-house equivalents</td><td style="text-align:right;"><strong>$200K&ndash;$500K</strong></td></tr>
+                        <tr><td><strong>Engineering velocity</strong></td><td>Existing IT team ships ~2x more internal tooling</td><td style="text-align:right;"><strong>Equivalent of 1&ndash;2 FTEs</strong></td></tr>
+                        <tr><td><strong>Merger integration acceleration</strong></td><td>AI data mapping, migration testing &amp; legacy code analysis compress the Mountain West timeline</td><td style="text-align:right;"><strong>Months off the timeline</strong></td></tr>
+                        <tr style="background:#f0f9ff;"><td><strong>Total annual impact (yr 2+)</strong></td><td>Range, conservative to realistic</td><td style="text-align:right;"><strong>$5M&ndash;$10M+</strong></td></tr>
+                        <tr style="background:#fef9e7;"><td><strong>Cost of one engineer</strong></td><td>A small fraction of the savings &mdash; single FTE, loaded comp</td><td style="text-align:right;"><strong>&lt; 5% of projected annual impact</strong></td></tr>
+                        <tr style="background:#e6fffa;"><td><strong>Payback period</strong></td><td>Even at the low end of impact</td><td style="text-align:right;"><strong>&lt; 3 months</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text); margin-top:0.75rem;">The real risk isn't hiring this person. The real risk is a regional carrier that <em>doesn't</em> while peers do &mdash; quietly losing a point of combined ratio per year to better-equipped competitors.</p>
+        </div>
+
+        <!-- CRAWL / WALK / RUN -->
+        <div class="chart-card" style="margin-top:1.5rem;">
+            <h3>&#128208; A Cautious, Auditable Roadmap &mdash; Crawl, Walk, Run</h3>
+            <div class="grid grid-3" style="margin-top:0.75rem;">
+                <div style="background:#f0f9ff; border-left:4px solid var(--primary-light); padding:1rem; border-radius:6px;">
+                    <h4 style="color:var(--primary); margin-bottom:0.5rem; font-size:0.95rem;">Months 1&ndash;3 &mdash; Crawl</h4>
+                    <ul style="font-size:0.85rem; margin-left:1.1rem; line-height:1.6;">
+                        <li>Deploy AI coding assistants to IT (zero customer impact)</li>
+                        <li>Voicemail &amp; email summarization for one claims pod (opt-in)</li>
+                        <li>Establish AI governance: human-in-the-loop, audit logs, data residency</li>
+                        <li>Pick one in-house build to replace one vendor tool</li>
+                    </ul>
+                </div>
+                <div style="background:#fef9e7; border-left:4px solid var(--warning); padding:1rem; border-radius:6px;">
+                    <h4 style="color:#744210; margin-bottom:0.5rem; font-size:0.95rem;">Months 4&ndash;9 &mdash; Walk</h4>
+                    <ul style="font-size:0.85rem; margin-left:1.1rem; line-height:1.6;">
+                        <li>AI-assisted underwriting briefs (review-only, no auto-bind)</li>
+                        <li>Automated annual policy review reports for renewals</li>
+                        <li>Predictive reserve range suggestions for new claims (advisory)</li>
+                        <li>First in-house tool replacing a SaaS vendor</li>
+                    </ul>
+                </div>
+                <div style="background:#e6fffa; border-left:4px solid var(--success); padding:1rem; border-radius:6px;">
+                    <h4 style="color:#22543d; margin-bottom:0.5rem; font-size:0.95rem;">Months 10&ndash;18 &mdash; Run</h4>
+                    <ul style="font-size:0.85rem; margin-left:1.1rem; line-height:1.6;">
+                        <li>Continuous portfolio &amp; reserve monitoring with anomaly alerts</li>
+                        <li>Mountain West data integration accelerated by AI tooling</li>
+                        <li>Natural-language analytics interface for execs &amp; actuaries</li>
+                        <li>Measurable combined-ratio impact in the annual statement</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="font-size:0.82rem; color:var(--text-light); margin-top:0.75rem; font-style:italic; text-align:center;">No moonshots. Every step is reversible, auditable, and keeps a human in the decision seat.</p>
         </div>
 
         <div class="insight-box" style="margin-top:1.5rem;">
-            <h4>&#128161; The Business Case</h4>
-            <p>A 1-point improvement in combined ratio at FBICI's current premium volume is worth <strong>$3.4M in annual underwriting profit</strong> ($341M NPE × 1%). Across the combined $800M post-merger entity, it's <strong>$8M per year</strong>. AI-driven improvements to claims accuracy, reserve estimation, and underwriting selection can realistically deliver 2–4 points of combined ratio improvement over 3 years — a $16–32M annual impact. The ROI on AI investment isn't theoretical; it's the difference between hovering near breakeven (99% combined) and sustained profitability (93–95%).</p>
-            <p style="margin-top:0.75rem;"><strong>This dashboard itself is a demonstration.</strong> Built entirely with AI-assisted development, it extracts, validates, and visualizes data from actual regulatory filings — the same workflow that can be applied to internal actuarial analysis, board reporting, and competitive intelligence.</p>
+            <h4>&#128161; The Bottom Line</h4>
+            <p>FBICI doesn't need to &ldquo;become an AI company.&rdquo; It needs to <strong>quietly install AI as a second set of eyes behind every human decision</strong> &mdash; reading the documents nobody had time to read, watching the public data nobody had time to watch, drafting the code nobody had time to draft, and summarizing the calls nobody had time to summarize. The people stay. The relationships stay. The judgement stays. The toil leaves, and the misses get caught.</p>
+            <p style="margin-top:0.75rem;"><strong>This dashboard and the working claims-intake pipeline below are evidence, not promises.</strong> Both were built with the same human-led, AI-assisted workflow proposed above. The same approach scales to underwriting briefs, renewal reviews, reserve analytics, and internal tooling &mdash; with one engineer, working alongside the team FBICI already has.</p>
         </div>
     </section>
 
@@ -1690,6 +1848,7 @@
     <p>IFB Mutual Insurance Holding Company — Strategic Intelligence Brief</p>
     <p style="margin-top:0.5rem;">Compiled from public data sources &bull; Statutory financial data from Idaho DOI &bull; April 2026</p>
     <p style="margin-top:0.5rem; font-size:0.75rem;">This analysis uses only publicly available data. It does not represent advice and should not be relied upon for investment or business decisions.</p>
+    <p id="visitor-counter" style="margin-top:0.75rem; font-size:0.7rem; opacity:0.55; letter-spacing:0.02em;"></p>
 </div>
 
 <script>
@@ -2102,6 +2261,21 @@
             if (link.getAttribute('href') === '#' + current) link.classList.add('active');
         });
     });
+
+    // Quiet visitor counter (counterapi.dev — free, no signup, no cookies, no PII).
+    // Fails silently: if the API is unreachable, the footer line simply stays empty.
+    (function () {
+        var el = document.getElementById('visitor-counter');
+        if (!el) return;
+        fetch('https://api.counterapi.dev/v1/fbici-dashboard/views/up')
+            .then(function (r) { return r.ok ? r.json() : null; })
+            .then(function (d) {
+                if (d && typeof d.count === 'number') {
+                    el.textContent = 'Page views: ' + d.count.toLocaleString();
+                }
+            })
+            .catch(function () { /* silent */ });
+    })();
 </script>
 
 </body>
